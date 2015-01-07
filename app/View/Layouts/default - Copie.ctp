@@ -14,21 +14,21 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$GTDescription = __d('gt_dev', 'GroupTrotteur');
-$GTVersion = __d('gt_dev', '1.0')
+$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $GTDescription ?>:
+		<?php echo $cakeDescription ?>:
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('gt.generic');
+		echo $this->Html->css('cake.generic');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -38,7 +38,7 @@ $GTVersion = __d('gt_dev', '1.0')
 <body>
 	<div id="container">
 		<div id="header">
-			<?php echo $this->Html->image('grouptrotteur.icon.png', array('height'=>'40px')); ?> Voyages | Nouveau | Idées
+			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
 		</div>
 		<div id="content">
 
@@ -48,13 +48,13 @@ $GTVersion = __d('gt_dev', '1.0')
 		</div>
 		<div id="footer">
 			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $GTDescription, 'border' => '0')),
+					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
 					'http://www.cakephp.org/',
 					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
 				);
 			?>
 			<p>
-				<?php echo $GTVersion; ?>
+				<?php echo $cakeVersion; ?>
 			</p>
 		</div>
 	</div>

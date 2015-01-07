@@ -1,0 +1,23 @@
+/*
+ * Master 2 SCMN University of Lorraine
+ * Web Technology project: GroupTrotteur
+ * author: Anais Chardon, Ayoub El Bachiri, Julie Pieyre, Aurelie Suzanne
+ * creation: 07/01/2015
+ * version: 1.0
+ */
+
+@charset "utf-8";
+
+#header
+{
+	background-color: #001f9f;
+	/*height: 1.5em;*/
+	color: #ffffff;	
+	font-size: 2em;
+}
+
+#footer
+{
+	background-color: #001f9f;
+	color: #ffffff;
+}
