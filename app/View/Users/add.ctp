@@ -1,3 +1,11 @@
+<?php
+	$this->extend('/Pages/home');
+
+	$this->assign('title', 'titre');
+
+	$this->start('inscription'); 
+?>
+
 <div class="users form">
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
@@ -17,3 +25,7 @@
 		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
 	</ul>
 </div>
+
+<?php 
+	$this->end(); 
+?>
