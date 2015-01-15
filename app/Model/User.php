@@ -1,18 +1,12 @@
 <?php
 App::uses('AppModel', 'Model');
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+
 /**
  * User Model
  *
  */
 class User extends AppModel {
-
-/**
- * Use table
- *
- * @var mixed False or table name
- */
-	public $useTable = 'user';
 
 /**
  * Primary key field
@@ -61,7 +55,7 @@ class User extends AppModel {
  * @param array $options
  * @return boolean
  */
-     public function beforeSave($options = array()) {
+    public function beforeSave($options = array()) {
         if (!empty($this->data[$this->alias]['password'])) {
             $passwordHasher = new SimplePasswordHasher(array('hashType' => 'sha256'));
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
@@ -70,5 +64,4 @@ class User extends AppModel {
         }
         return true;
     }
-
 }

@@ -126,4 +126,5 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('login', 'add', 'index'); 
     }*/	
+
 }

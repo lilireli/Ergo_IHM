@@ -28,7 +28,7 @@ $GTVersion = __d('gt_dev', '1.0')
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('gt.generic');
+		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('gt.generic');
 
 		echo $this->fetch('meta');

@@ -16,6 +16,6 @@ App::uses('Debugger', 'Utility');
 <p> Bienvenue sur le site d'organisation de voyages collaboratif </p>
 
 <h3>Inscription</h3>
-<?php echo $this->fetch('inscription'); ?>
+<?php echo $this->element('inscription'); ?>
 
 <h3> Connexion </h3>
