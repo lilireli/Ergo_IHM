@@ -48,6 +48,12 @@ class User extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'password' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Un mot de passe est requis'
+            )
+        )
 	);
 
 /**

@@ -112,7 +112,7 @@ class UsersController extends AppController {
 
             if ($this->Auth->login($this->request->data['User'])) {
                 $this->Session->setFlash(__('Welcome, '. $this->Auth->user('user_name')));
-                $this->redirect($this->Auth->redirectUrl());
+                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'index'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password'));
             }
@@ -120,11 +120,20 @@ class UsersController extends AppController {
     }
 
 /**
+ * logout method
+ *
+ * @return confirmation
+ */
+	public function logout() {
+    	return $this->redirect($this->Auth->logout());
+	}
+
+/**
  * beforeFilter
  */
-	/*public function beforeFilter() {
+	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login', 'add', 'index'); 
-    }*/	
+        $this->Auth->allow('add', 'logout'); 
+    }	
 
 }

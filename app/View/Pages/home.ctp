@@ -19,3 +19,4 @@ App::uses('Debugger', 'Utility');
 <?php echo $this->element('inscription'); ?>
 
 <h3> Connexion </h3>
+<?php echo $this->element('connexion'); ?>
