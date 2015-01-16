@@ -39,7 +39,15 @@ $GTVersion = __d('gt_dev', '1.0')
 <body>
 	<div id="container">
 		<div id="header">
-			<?php echo $this->Html->image('grouptrotteur.icon.png', array('height'=>'40px')); ?> Voyages | Nouveau | Idées
+			<?php 
+				echo $this->Html->image('grouptrotteur.icon.png', array('height'=>'40px')); 
+				echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'home'));
+				echo ' | ';
+				echo $this->Html->link('Voyages', array('controller'=>'pages', 'action'=>'display', 'home'));
+				echo '|';
+				echo $this->Html->link('Mon Compte', array('controller'=>'pages', 'action'=>'display', 'mon_compte'));
+				echo ' | ...';
+			?>
 		</div>
 		<div id="content">
 
@@ -59,6 +67,5 @@ $GTVersion = __d('gt_dev', '1.0')
 			</p>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

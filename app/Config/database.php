@@ -76,7 +76,7 @@ class DATABASE_CONFIG {
 		'password' => '',
 		'database' => 'groupTrotteur',
 		'prefix' => '',
-		//'encoding' => 'utf8',
+		'encoding' => 'utf8',
 	);
 
 	public $test = array(
@@ -87,6 +87,6 @@ class DATABASE_CONFIG {
 		'password' => '',
 		'database' => 'groupTrotteur',
 		'prefix' => '',
-		//'encoding' => 'utf8',
+		'encoding' => 'utf8',
 	);
 }
