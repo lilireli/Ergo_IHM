@@ -40,13 +40,23 @@ $GTVersion = __d('gt_dev', '1.0')
 	<div id="container">
 		<div id="header">
 			<?php 
+				$user_id = $this->session->read('Auth.User.user_id');
+				$username = $this->session->read('Auth.User.user_name');
+
 				echo $this->Html->image('grouptrotteur.icon.png', array('height'=>'40px')); 
-				echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'home'));
-				echo ' | ';
-				echo $this->Html->link('Voyages', array('controller'=>'pages', 'action'=>'display', 'home'));
-				echo '|';
-				echo $this->Html->link('Mon Compte', array('controller'=>'pages', 'action'=>'display', 'mon_compte'));
-				echo ' | ...';
+
+				if ($username != NULL) {
+					echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'index'));
+					echo ' | ';
+					echo $this->Html->link('Voyages', array('controller'=>'pages', 'action'=>'display', 'voyage'));
+					echo '|';
+					echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit/'.$user_id));
+					echo ' | ...';
+
+					echo $username;
+					echo $this->Html->link('Deconnexion', array('controller'=>'users', 'action'=>'logout'));
+				}
+
 			?>
 		</div>
 		<div id="content">

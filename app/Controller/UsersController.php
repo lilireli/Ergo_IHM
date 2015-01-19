@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('AuthComponent', 'Controller/Component');
 /**
  * Users Controller
  *
@@ -13,7 +14,20 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array(
+		'Paginator', 
+		'Auth' => array(
+			'authenticate' => array(
+				'Form' => array(
+					'fields' => array('username' => 'user_name', 'password'),
+					'passwordHasher' => array(
+						'className' => 'Simple',
+						'hashType' => 'sha256'
+					)
+				)
+			)
+		)
+	);
 
 /**
  * index method
@@ -110,7 +124,7 @@ class UsersController extends AppController {
         // if we get the post information, try to authenticate
         if ($this->request->is('post')) {
 
-            if ($this->Auth->login($this->request->data['User'])) {
+            if ($this->Auth->login()) {
                 $this->Session->setFlash(__('Welcome, '. $this->Auth->user('user_name')));
                 $this->redirect(array('controller' => 'pages', 'action' => 'display', 'index'));
             } else {
