@@ -21,6 +21,8 @@ class Voyage extends AppModel {
  */
 	public $displayField = 'voyage_name';
 
+	public $foreignKey = 'createur_id';
+
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

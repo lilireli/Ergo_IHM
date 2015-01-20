@@ -48,9 +48,9 @@ $GTVersion = __d('gt_dev', '1.0')
 				if ($username != NULL) {
 					echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'index'));
 					echo ' | ';
-					echo $this->Html->link('Voyages', array('controller'=>'pages', 'action'=>'display', 'voyage'));
+					echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index', $user_id));
 					echo '|';
-					echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit/'.$user_id));
+					echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit', $user_id));
 					echo ' | ...';
 
 					echo $username;

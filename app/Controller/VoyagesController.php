@@ -20,9 +20,11 @@ class VoyagesController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function index($id) {
 		$this->Voyage->recursive = 0;
-		$this->set('voyages', $this->Paginator->paginate());
+
+ 		$options = array('conditions' => array('Voyage.' . $this->Voyage->foreignKey => $id));
+	 	$this->set('voyages', $this->Voyage->find('all', $options));
 	}
 
 /**
@@ -48,12 +50,15 @@ class VoyagesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Voyage->create();
+			$usersVoyages = $this->Voyage->User->find('list');
+			$this->set(compact('usersVoyages'));
+			
 			if ($this->Voyage->save($this->request->data)) {
 				return $this->flash(__('The voyage has been saved.'), array('action' => 'index'));
 			}
 		}
-		$usersVoyages = $this->Voyage->User->find('list');
-		$this->set(compact('usersVoyages'));
+		//$usersVoyages = $this->Voyage->User->find('list');
+		//$this->set(compact('usersVoyages'));
 	}
 
 /**
@@ -98,4 +103,5 @@ class VoyagesController extends AppController {
 			return $this->flash(__('The voyage could not be deleted. Please, try again.'), array('action' => 'index'));
 		}
 	}
+
 }
