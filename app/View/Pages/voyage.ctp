@@ -1,5 +1,6 @@
 <h1>Voyages</h1>
 
+<div class="voyages form">
 <?php echo $this->Form->create('Voyage', array('action' => 'add')); ?>
 	<fieldset>
 		<legend><?php echo __('Add Voyage'); ?></legend>
@@ -8,7 +9,14 @@
 		echo $this->Form->input('date_debut');
 		echo $this->Form->input('date_fin');
 		echo $this->Form->input('lieu');
-		echo $this->Form->input('users_voyages');
+
+		echo __('<div class=hidden>');
+		echo $this->Form->input('createur_id', array(
+                'type' => 'text',
+                'label' => 'createur_id',
+                'default' => $this->session->read('Auth.User.user_id')
+            ));
+		echo __('</div>')
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
