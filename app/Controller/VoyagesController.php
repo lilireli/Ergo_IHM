@@ -50,15 +50,14 @@ class VoyagesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Voyage->create();
-			$usersVoyages = $this->Voyage->User->find('list');
-			$this->set(compact('usersVoyages'));
 			
 			if ($this->Voyage->save($this->request->data)) {
 				return $this->flash(__('The voyage has been saved.'), array('action' => 'index'));
 			}
 		}
-		//$usersVoyages = $this->Voyage->User->find('list');
-		//$this->set(compact('usersVoyages'));
+
+		$users = $this->Voyage->User->find('list');
+		$this->set(compact('users'));
 	}
 
 /**
@@ -80,8 +79,8 @@ class VoyagesController extends AppController {
 			$options = array('conditions' => array('Voyage.' . $this->Voyage->primaryKey => $id));
 			$this->request->data = $this->Voyage->find('first', $options);
 		}
-		$usersVoyages = $this->Voyage->UsersVoyage->find('list');
-		$this->set(compact('usersVoyages'));
+		$users = $this->Voyage->UsersVoyage->find('list');
+		$this->set(compact('users'));
 	}
 
 /**

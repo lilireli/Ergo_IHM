@@ -3,12 +3,15 @@
 	<fieldset>
 		<legend><?php echo __('Add Voyage'); ?></legend>
 	<?php
+		$user_id = $this->session->read('Auth.User.user_id');
+
 		echo $this->Form->input('voyage_name');
 		echo $this->Form->input('date_debut');
 		echo $this->Form->input('date_fin');
 		echo $this->Form->input('lieu');
-		//echo $this->Form->input('users_voyages');
-		//$this->Form->input('createur_id' => $this->session->read('Auth.User.user_id'));
+		echo $this->Form->input('createur_id', 
+			array('type' => 'text', 'default' => $user_id));
+		echo $this->Form->input('User');		
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

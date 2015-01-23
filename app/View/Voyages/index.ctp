@@ -14,7 +14,7 @@
 
 		echo $this->Form->input('createur_id', 
 			array('type' => 'hidden', 'default' => $user_id));
-		echo $this->Form->input('Users.user_id',
+		echo $this->Form->input('User',
 			array('type' => 'hidden', 'default' => $user_id));
 	?>
 	</fieldset>
