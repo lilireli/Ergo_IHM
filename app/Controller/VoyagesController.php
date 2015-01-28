@@ -27,6 +27,7 @@ class VoyagesController extends AppController {
  		// equivalent SQL simple
  		// SELECT *
  		// FROM voyages AS v
+ 		//      LEFT OUTER JOIN users ...
  		//		INNER JOIN users_voyages AS uv ON v.voyage_id = uv.voyage_id
 		// WHERE users_voyages.user_id = $user_id;
 
@@ -96,7 +97,7 @@ class VoyagesController extends AppController {
 			$options = array('conditions' => array('Voyage.' . $this->Voyage->primaryKey => $id));
 			$this->request->data = $this->Voyage->find('first', $options);
 		}
-		$users = $this->Voyage->UsersVoyage->find('list');
+		$users = $this->Voyage->User->find('list');
 		$this->set(compact('users'));
 	}
 
@@ -118,6 +119,43 @@ class VoyagesController extends AppController {
 		} else {
 			return $this->flash(__('The voyage could not be deleted. Please, try again.'), array('action' => 'index'));
 		}
+	}
+
+	public function participants($id = null) {
+		// Lister les participants d'un voyage
+
+		// equivalent SQL simple
+ 		// SELECT *
+ 		// FROM voyages AS v
+ 		//		INNER JOIN users_voyages AS uv ON v.voyage_id = uv.voyage_id
+		// WHERE users_voyages.voyage_id = $voyage_id;
+
+		$options = array('joins' => array(
+	 		array(
+	 			'table' => 'users_voyages',
+	 			'alias' => 'UserVoyage',
+	 			'type' => 'inner',
+	 			'foreignKey' => false,
+	 			'conditions' => array(
+	 				'UserVoyage.voyage_id = Voyage.voyage_id',
+	 				'UserVoyage.voyage_id = '.$id)
+	 		)));
+
+	 	return $this->Voyage->find('all', $options);
+	}
+
+	public function add_participants() {
+		if ($this->request->is('post')) {
+			$this->Voyage->create();
+
+			if ($this->Voyage->save($this->request->data)) {
+				debug($this->data);
+				return $this->flash(__('The participants have been saved.'), array('action' => 'index'));
+			}
+		}
+
+		$users = $this->Voyage->find('list');
+		$this->set(compact('users'));
 	}
 
 }

@@ -148,6 +148,12 @@ class UsersController extends AppController {
 	public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('add', 'logout'); 
-    }	
+    }
+
+
+    public function get_users() {
+		$this->User->recursive = 0;
+		return $this->Paginator->paginate();
+	}	
 
 }

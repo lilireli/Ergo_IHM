@@ -43,7 +43,7 @@
 				<td><?php echo h($voyage['Voyage']['date_fin']); ?>&nbsp;</td>
 				<td><?php echo h($voyage['Voyage']['lieu']); ?>&nbsp;</td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('Voir'), array('action' => 'edit', $voyage['Voyage']['voyage_id'])); ?>
+					<?php echo $this->Html->link(__('Voir'), array('action' => 'view', $voyage['Voyage']['voyage_id'])); ?>
 					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $voyage['Voyage']['voyage_id']), array(), __('Are you sure you want to delete # %s?', $voyage['Voyage']['voyage_id'])); ?>
 				</td>
 			</tr>

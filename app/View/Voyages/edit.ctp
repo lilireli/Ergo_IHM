@@ -8,7 +8,7 @@
 		echo $this->Form->input('date_debut');
 		echo $this->Form->input('date_fin');
 		echo $this->Form->input('lieu');
-		echo $this->Form->input('users_voyages');
+		echo $this->Form->input('User');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
