@@ -130,16 +130,31 @@ class VoyagesController extends AppController {
  		//		INNER JOIN users_voyages AS uv ON v.voyage_id = uv.voyage_id
 		// WHERE users_voyages.voyage_id = $voyage_id;
 
-		$options = array('joins' => array(
-	 		array(
-	 			'table' => 'users_voyages',
-	 			'alias' => 'UserVoyage',
-	 			'type' => 'inner',
-	 			'foreignKey' => false,
-	 			'conditions' => array(
-	 				'UserVoyage.voyage_id = Voyage.voyage_id',
-	 				'UserVoyage.voyage_id = '.$id)
-	 		)));
+		$options = array(
+			'joins' => array(
+				array(
+		 			'table' => 'users_voyages',
+		 			'alias' => 'UserVoyage',
+		 			'type' => 'inner',
+		 			'foreignKey' => false,
+		 			'conditions' => array(
+		 				'UserVoyage.voyage_id = Voyage.voyage_id',
+		 				'UserVoyage.voyage_id = '.$id
+	 				)
+	 			),
+		 		array(
+		 			'table' => 'users',
+		 			'alias' => 'User2',
+		 			'type' => 'inner',
+		 			'foreignKey' => false,
+		 			'conditions' => array(
+		 				'UserVoyage.user_id = User2.user_id'
+		 			)
+		 		)
+	 		),
+	 		'fields'=> array(
+	 			'User2.user_name'
+	 		));
 
 	 	return $this->Voyage->find('all', $options);
 	}

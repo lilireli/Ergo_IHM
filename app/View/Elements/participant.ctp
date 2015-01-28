@@ -2,7 +2,7 @@
 	$participants = $this->requestAction(
 		array('controller'=>'Voyages', 'action'=>'participants', $id)); 
 	$users = $this->requestAction(
-		array('controller'=>'Users', 'action'=>'get_users'));
+		array('controller'=>'Users', 'action'=>'get_users', $id));
 ?>
 
 <div class="participants">
@@ -16,7 +16,8 @@
 		<tbody>
 			<?php foreach ($participants as $participant): ?>
 			<tr>
-				<td><?php echo h($participant['User']['user_id']); ?>&nbsp;</td>
+				<td><?php 
+					echo h($participant['User2']['user_name']); ?>&nbsp;</td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>

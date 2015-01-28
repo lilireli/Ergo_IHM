@@ -151,9 +151,12 @@ class UsersController extends AppController {
     }
 
 
-    public function get_users() {
-		$this->User->recursive = 0;
-		return $this->Paginator->paginate();
+    public function get_users($id) {
+    // id est l'id du voyage
+    	$options = array('conditions' => array(
+	 		'User.user_id NOT IN (SELECT user_id FROM users_voyages WHERE voyage_id = '.$id.')'));
+
+	 	return $this->User->find('all', $options);
 	}	
 
 }
