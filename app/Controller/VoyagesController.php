@@ -21,9 +21,26 @@ class VoyagesController extends AppController {
  * @return void
  */
 	public function index($id) {
+		// lister uniquement les voyages d'une personne
 		$this->Voyage->recursive = 0;
 
- 		$options = array('conditions' => array('Voyage.' . $this->Voyage->foreignKey => $id));
+ 		// equivalent SQL simple
+ 		// SELECT *
+ 		// FROM voyages AS v
+ 		//		INNER JOIN users_voyages AS uv ON v.voyage_id = uv.voyage_id
+		// WHERE users_voyages.user_id = $user_id;
+
+	 	$options = array('joins' => array(
+	 		array(
+	 			'table' => 'users_voyages',
+	 			'alias' => 'UserVoyage',
+	 			'type' => 'inner',
+	 			'foreignKey' => false,
+	 			'conditions' => array(
+	 				'UserVoyage.voyage_id = Voyage.voyage_id',
+	 				'UserVoyage.user_id = '.$id)
+	 		)));
+
 	 	$this->set('voyages', $this->Voyage->find('all', $options));
 	}
 
