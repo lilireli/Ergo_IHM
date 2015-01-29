@@ -1,4 +1,6 @@
 <div class="users form">
+<h2><?php echo __('Gestion de mon compte')?></h2>
+
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
 		<legend><?php echo __('Mes données'); ?></legend>
@@ -9,13 +11,12 @@
 		echo $this->Form->input('password');
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Modifier mes données')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 
 		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.user_id')), array(), __('Are you sure you want to delete # %s?', $this->Form->value('User.user_id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index')); ?></li>
 	</ul>
 </div>

@@ -1,12 +1,13 @@
 <?php 
 	$participants = $this->requestAction(
-		array('controller'=>'Voyages', 'action'=>'participants', $id)); 
+		array('controller'=>'Voyages', 'action'=>'participants', $voyage_id)); 
 	$users = $this->requestAction(
-		array('controller'=>'Users', 'action'=>'get_users', $id));
+		array('controller'=>'Users', 'action'=>'get_users', $voyage_id));
 ?>
 
-<div class="participants">
-	<h3><?php echo __('Liste des participants'); ?></h3>
+<h2><?php echo __('Liste des participants'); ?></h2>
+
+<div class="view participants">
 	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
@@ -25,7 +26,6 @@
 </div>
 
 <div class="add participant">
-	<h3><?php echo __('Ajouter des participants'); ?></h3>
 	<?php echo $this->Form->create('Voyage', array('action' => 'add_participants')); ?>
     <fieldset>
         <legend>
@@ -34,7 +34,7 @@
         <?php 
         	
         	echo $this->Form->input('voyage_id', 
-        		array('type'=>'hidden', 'default'=>$id));
+        		array('type'=>'hidden', 'default'=>$voyage_id));
 
         	foreach ($users as $user):
 

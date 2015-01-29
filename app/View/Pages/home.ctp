@@ -1,8 +1,12 @@
 <?php
 /**
- * @link          http://cakephp.org CakePHP(tm) Project
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Page d'accueil en mode non connecté 
+ * (seule option possible : se connecter)
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
  * @package       app.View.Pages
- * @since         CakePHP(tm) v 0.10.0.1076
  */
 
 if (!Configure::read('debug')):

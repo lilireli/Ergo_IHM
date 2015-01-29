@@ -1,9 +1,7 @@
-/*
- * Master 2 SCMN University of Lorraine
- * Web Technology project: GroupTrotteur
- * author: Anais Chardon, Ayoub El Bachiri, Julie Pieyre, Aurelie Suzanne
- * creation: 07/01/2015
- * version: 1.0
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
  */
 
 @charset "utf-8";
@@ -52,4 +50,22 @@ a {
 	color: #ffffff;
 	text-decoration: none;
 	font-weight: normal;
+}
+
+/*
+ * Titles
+ */
+h1 {
+	font-size: 2em;
+	color: blue;
+}
+
+h2 {
+	font-size: 1.5em;
+	color: blue;
+}
+
+fieldset legend {
+	color: black;
+	font-size: 100%;
 }

@@ -1,5 +1,5 @@
 <div class="voyages view">
-	<h2><?php echo __('Voyage'); ?></h2>
+	<h2><?php echo __('Mon Voyage en quelques mots'); ?></h2>
 	<dl>
 		<dt><?php echo __('Voyage Id'); ?></dt>
 		<dd>
@@ -29,7 +29,15 @@
 	</dl>
 </div>
 
-<?php echo $this->element('participant',  array('id' => $voyage['Voyage']['voyage_id'])); ?>
+<div class="participants">
+	<?php $voyage_id = $voyage['Voyage']['voyage_id']; ?>
+
+	<?php echo $this->element('participant',  array('voyage_id' => $voyage_id)); ?>
+</div>
+
+<div class="etapes">
+	<?php echo $this->element('etape', array('voyage_id' => $voyage_id)); ?>
+</div>
 
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

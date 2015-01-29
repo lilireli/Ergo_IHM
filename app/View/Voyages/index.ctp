@@ -1,28 +1,7 @@
-<h1>Voyages</h1>
-
-<div class="voyages form">
-<?php echo $this->Form->create('Voyage', array('action' => 'add')); ?>
-	<fieldset>
-		<legend><?php echo __('Add Voyage'); ?></legend>
-	<?php
-		$user_id = $this->session->read('Auth.User.user_id');
-
-		echo $this->Form->input('voyage_name');
-		echo $this->Form->input('date_debut');
-		echo $this->Form->input('date_fin');
-		echo $this->Form->input('lieu');
-
-		echo $this->Form->input('createur_id', 
-			array('type' => 'hidden', 'default' => $user_id));
-		echo $this->Form->input('User',
-			array('type' => 'hidden', 'default' => $user_id));
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
+<h1><?php echo __('Voyages'); ?></h1>
 
 <div class="voyages index">
-	<h2><?php echo __('Voyages'); ?></h2>
+	<h2><?php echo __('La liste de mes voyages'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
@@ -51,4 +30,27 @@
 		</tbody>
 	</table>
 </div>
+
+
+<div class="voyages form">
+<?php echo $this->Form->create('Voyage', array('action' => 'add')); ?>
+	<fieldset>
+		<legend><?php echo __('Ajouter un voyage'); ?></legend>
+	<?php
+		$user_id = $this->session->read('Auth.User.user_id');
+
+		echo $this->Form->input('voyage_name');
+		echo $this->Form->input('date_debut');
+		echo $this->Form->input('date_fin');
+		echo $this->Form->input('lieu');
+
+		echo $this->Form->input('createur_id', 
+			array('type' => 'hidden', 'default' => $user_id));
+		echo $this->Form->input('User',
+			array('type' => 'hidden', 'default' => $user_id));
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+</div>
+
 

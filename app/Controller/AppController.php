@@ -1,5 +1,9 @@
 <?php
 /**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ *
  * Application level Controller
  *
  * This file is application-wide controller file. You can put all
@@ -31,6 +35,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+    // redirections à la connexion et à la déconnexion
 	public $components = array(
         'Session',
         'Auth' => array(
@@ -40,7 +45,7 @@ class AppController extends Controller {
     );
 
     public function beforeFilter() {
-        $this->Auth->allow('index', 'view');
+        // réduire les pages visibles hors connexion au home
         $this->Auth->allow(array('controller' => 'pages', 'action' => 'display', 'home'));
     }
 }

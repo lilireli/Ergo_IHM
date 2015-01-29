@@ -1,19 +1,12 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
  *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
  * @package       app.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+// version de GroupTrotteur
 $GTDescription = __d('gt_dev', 'GroupTrotteur');
 $GTVersion = __d('gt_dev', '1.0')
 ?>
@@ -30,6 +23,8 @@ $GTVersion = __d('gt_dev', '1.0')
 
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('gt.generic');
+		// les paramètres de style de GroupTrotteur viennent écraser
+		// Les réglages embétants de CakePHP mais certains sont conservés
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -40,12 +35,18 @@ $GTVersion = __d('gt_dev', '1.0')
 	<div id="container">
 		<div id="header">
 			<?php 
+				// réalisation du bandeau de titre
+
+				// informations session
 				$user_id = $this->session->read('Auth.User.user_id');
 				$username = $this->session->read('Auth.User.user_name');
 
+				//ajout du logo
 				echo $this->Html->image('grouptrotteur.icon.png', array('height'=>'40px')); 
 
+				// on n'affiche les menus que si la personne est connectée
 				if ($username != NULL) {
+					// menus du bandeau
 					echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'index'));
 					echo ' | ';
 					echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index', $user_id));
@@ -53,7 +54,10 @@ $GTVersion = __d('gt_dev', '1.0')
 					echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit', $user_id));
 					echo ' | ...';
 
+					// utilisateur
 					echo $username;
+
+					// deconnexion
 					echo $this->Html->link('Deconnexion', array('controller'=>'users', 'action'=>'logout'));
 				}
 
