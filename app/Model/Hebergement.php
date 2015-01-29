@@ -1,9 +1,8 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Voyage Model
+ * Hebergement Model
  *
- * @property users_voyages $users_voyages
  */
 class Hebergement extends AppModel {
 

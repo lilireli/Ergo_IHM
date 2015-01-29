@@ -43,25 +43,34 @@ $GTVersion = __d('gt_dev', '1.0')
 
 				//ajout du logo
 				echo $this->Html->image('grouptrotteur.icon.png', array('height'=>'40px')); 
-
-				// on n'affiche les menus que si la personne est connectée
-				if ($username != NULL) {
-					// menus du bandeau
-					echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'index'));
-					echo ' | ';
-					echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index', $user_id));
-					echo '|';
-					echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit', $user_id));
-					echo ' | ...';
-
-					// utilisateur
-					echo $username;
-
-					// deconnexion
-					echo $this->Html->link('Deconnexion', array('controller'=>'users', 'action'=>'logout'));
-				}
-
 			?>
+
+			<div id="links">
+				<?php
+					// on n'affiche les menus que si la personne est connectée
+					if ($username != NULL) {
+						// menus du bandeau
+						echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'index'));
+						echo ' | ';
+						echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index', $user_id));
+						echo '|';
+						echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit', $user_id));
+						echo ' | ...';
+					}
+				?>
+			</div>
+			<div id="userConnection">
+				<?php
+					if ($username != NULL) {
+						// utilisateur
+						echo $username;
+						echo __("   ");
+
+						// deconnexion
+						echo $this->Html->link('Deconnexion', array('controller'=>'users', 'action'=>'logout'));
+					}
+				?>
+			</div>
 		</div>
 		<div id="content">
 

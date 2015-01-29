@@ -13,13 +13,24 @@
 	background-color: #001f9f;
 	/*height: 1.5em;*/
 	color: #ffffff;	
-	font-size: 2em;
 	font-weight: normal;
 }
 
 #footer {
 	background-color: #001f9f;
 	color: #ffffff;
+}
+
+#header #links{
+	display: inline;
+	position: relative;
+	font-size: 2em;
+}
+
+#header #userConnection{
+	display: inline;
+	position:relative;
+	font-size: 1em;
 }
 
 /*
@@ -41,6 +52,13 @@ div.view {
 
 div.hidden {
 	display: none;
+}
+
+/* div pour la connexion et inscription */
+div.login {
+	display: inline;
+	width: 300pt;
+	background-color: black;
 }
 
 /*
@@ -68,4 +86,5 @@ h2 {
 fieldset legend {
 	color: black;
 	font-size: 100%;
+	font-weight: normal;
 }
