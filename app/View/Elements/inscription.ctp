@@ -1,5 +1,7 @@
-<div class="users form">
-<?php echo $this->Form->create('User', array('action' => 'add')); ?>
+<div class="login form" id="inscription">
+	<h3><?php echo __("Inscription"); ?></h3>
+
+	<?php echo $this->Form->create('User', array('action' => 'add')); ?>
 	<fieldset>
 		<legend><?php echo __("S'inscrire"); ?></legend>
 	<?php

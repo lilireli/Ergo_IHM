@@ -19,12 +19,6 @@ App::uses('Debugger', 'Utility');
 <h2>Accueil</h2>
 <p> Bienvenue sur le site d'organisation de voyages collaboratif </p>
 
-<div class="login">
-	<h3>Inscription</h3>
-	<?php echo $this->element('inscription'); ?>
-</div>
+<?php echo $this->element('connexion'); ?>
+<?php echo $this->element('inscription'); ?>
 
-<div class="login">
-	<h3> Connexion </h3>
-	<?php echo $this->element('connexion'); ?>
-</div>
