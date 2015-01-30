@@ -63,7 +63,8 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
-				return $this->flash(__('The user has been saved.'), array('action' => 'index'));
+				$this->Session->setFlash(__('Vous êtes maintenant enregistré, veuillez vous connecter pour continuer'));
+                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
 			}
 		}
 	}
@@ -101,11 +102,13 @@ class UsersController extends AppController {
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+
 		$this->request->allowMethod('post', 'delete');
 		if ($this->User->delete()) {
-			return $this->flash(__('The user has been deleted.'), array('action' => 'index'));
+			$this->logout();
 		} else {
-			return $this->flash(__('The user could not be deleted. Please, try again.'), array('action' => 'index'));
+			$this->Session->setFlash(__('Erreur durant la suppression, veuillez réessayer'));
+            $this->redirect(array('action' => 'view', $id));
 		}
 	}
 
@@ -125,7 +128,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
 
             if ($this->Auth->login()) {
-                $this->Session->setFlash(__('Welcome, '. $this->Auth->user('user_name')));
+                $this->Session->setFlash(__('Bienvenue, '. $this->Auth->user('user_name')));
                 $this->redirect(array('controller' => 'pages', 'action' => 'display', 'index'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password'));

@@ -18,8 +18,5 @@
 	<ul>
 
 		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Voyage.voyage_id')), array(), __('Are you sure you want to delete # %s?', $this->Form->value('Voyage.voyage_id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Voyages'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users Voyages'), array('controller' => 'users_voyages', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Users Voyages'), array('controller' => 'users_voyages', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

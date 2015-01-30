@@ -70,6 +70,10 @@
         		array('type' => 'hidden', 'default' => $etape_id));
         	echo $this->Form->input('date_debut');
         	echo $this->Form->input('date_fin');
+        	echo $this->Form->input('type');
+        	echo $this->Form->input('lieu_depart');
+        	echo $this->Form->input('lieu_arrivee');
+        	echo $this->Form->input('prix');
         	echo $this->Form->input('createur_id',
         		array('type' => 'hidden', 'default' => $user_id));
     	?>

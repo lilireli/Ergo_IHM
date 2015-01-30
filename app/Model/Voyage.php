@@ -36,6 +36,7 @@ class Voyage extends AppModel {
 			'className' => 'User',
 			'joinTable' => 'users_voyages',
 			'foreignKey' => 'voyage_id',
+			//'primaryKey' => 'assoc_id',
 			'associationForeignKey' => 'user_id',
 			'unique' => false,
 			'conditions' => '',

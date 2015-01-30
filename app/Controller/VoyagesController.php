@@ -70,7 +70,8 @@ class VoyagesController extends AppController {
 			$this->Voyage->create();
 			
 			if ($this->Voyage->save($this->request->data)) {
-				return $this->flash(__('The voyage has been saved.'), array('action' => 'index'));
+				$this->Session->setFlash(__('le voyage a été sauvé'));
+                $this->redirect(array('action' => 'index', $this->request->data['Voyage']['createur_id']));
 			}
 		}
 
@@ -91,7 +92,8 @@ class VoyagesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Voyage->save($this->request->data)) {
-				return $this->flash(__('The voyage has been saved.'), array('action' => 'index'));
+				$this->Session->setFlash(__('le voyage a été sauvé'));
+                $this->redirect(array('action' => 'index', $this->request->data['Voyage']['createur_id']));
 			}
 		} else {
 			$options = array('conditions' => array('Voyage.' . $this->Voyage->primaryKey => $id));
@@ -164,8 +166,10 @@ class VoyagesController extends AppController {
 			$this->Voyage->create();
 
 			if ($this->Voyage->save($this->request->data)) {
-				debug($this->data);
-				return $this->flash(__('The participants have been saved.'), array('action' => 'index'));
+				$this->Session->setFlash(__('les participants ont été ajoutés'));
+                $this->redirect(array(
+                	'action' => 'view', 
+                	$this->request->data['Voyage']['voyage_id']));
 			}
 		}
 

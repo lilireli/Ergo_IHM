@@ -54,7 +54,7 @@ $GTVersion = __d('gt_dev', '1.0')
 						echo ' | ';
 						echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index', $user_id));
 						echo '|';
-						echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'edit', $user_id));
+						echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'view', $user_id));
 						echo ' | ...';
 					}
 				?>

@@ -7,6 +7,7 @@
 	<?php
 		echo $this->Form->input('user_name');
 		echo $this->Form->input('mail');
+		echo $this->Form->input('date_of_birth');
 		echo $this->Form->input('password');
 	?>
 	</fieldset>

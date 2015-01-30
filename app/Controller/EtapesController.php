@@ -14,7 +14,11 @@ class EtapesController extends AppController {
 			$this->Etape->create();
 			
 			if ($this->Etape->save($this->request->data)) {
-				return $this->flash(__("L'étape a été sauvée."), array('action' => 'index'));
+				$this->Session->setFlash(__("L'étape a été sauvée."));
+				$this->redirect(array(
+					'controller' => 'voyages',
+                	'action' => 'view', 
+                	$this->request->data['Etape']['voyage_id']));
 			}
 		}
 	}
