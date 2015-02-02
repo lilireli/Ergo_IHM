@@ -39,7 +39,6 @@
  */
 
 /* general div */
-div.form,
 div.index,
 div.view {
 	float:right;
@@ -64,6 +63,15 @@ div.login {
 
 div#inscription {
 	border-right:2px solid #666;
+}
+
+/* floating div (to have multiples in the same line) */
+div.float {
+	display: inline-block;
+}
+
+div.right {
+	float: right;
 }
 
 /*
@@ -151,4 +159,28 @@ input[type=submit]:active,
 {
     border-bottom: 1px solid #6d6e72;
     background-color: blue;
+}
+
+/*
+ * Liste des voyages 
+ */
+
+/* div pour les voyages */
+div.voyages {
+	background-color: #4D62BC;
+	border: 1px solid #001f9f;
+	color: black;
+	margin: 2%;
+	margin-left: 7%;
+	width: 85%;
+	padding: 1%;
+}
+
+div.form_voyages {
+	background-color: #808FCF;
+}
+
+h4.voyages {
+	font-size: 2em;
+	color: #E8730C;
 }

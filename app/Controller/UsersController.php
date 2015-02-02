@@ -82,7 +82,30 @@ class UsersController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
-				return $this->flash(__('The user has been saved.'), array('action' => 'index'));
+				$this->Session->setFlash(__('Vos modifications ont été sauvées'));
+                $this->redirect(array('action' => 'view', $id));
+			}
+		} else {
+			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+			$this->request->data = $this->User->find('first', $options);
+		}
+	}
+
+/**
+ * edit password method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function edit_pw($id = null) {
+		if (!$this->User->exists($id)) {
+			throw new NotFoundException(__('Invalid user'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->User->save($this->request->data)) {
+				$this->Session->setFlash(__('Votre nouveau mot de passe a été sauvé'));
+                $this->redirect(array('action' => 'view', $id));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -160,6 +183,6 @@ class UsersController extends AppController {
 	 		'User.user_id NOT IN (SELECT user_id FROM users_voyages WHERE voyage_id = '.$id.')'));
 
 	 	return $this->User->find('all', $options);
-	}	
+	}
 
 }

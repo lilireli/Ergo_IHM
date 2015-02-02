@@ -1,41 +1,35 @@
-<h1><?php echo __('Voyages'); ?></h1>
+<h1><?php echo __('Mes Voyages'); ?></h1>
 
-<div class="voyages index">
-	<h2><?php echo __('La liste de mes voyages'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-		<thead>
-			<tr>
-					<th><?php echo __('voyage_id'); ?></th>
-					<th><?php echo __('voyage_name'); ?></th>
-					<th><?php echo __('date_debut'); ?></th>
-					<th><?php echo __('date_fin'); ?></th>
-					<th><?php echo __('lieu'); ?></th>
-					<th class="actions"><?php echo __('Actions'); ?></th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php foreach ($voyages as $voyage): ?>
-			<tr>
-				<td><?php echo h($voyage['Voyage']['voyage_id']); ?>&nbsp;</td>
-				<td><?php echo h($voyage['Voyage']['voyage_name']); ?>&nbsp;</td>
-				<td><?php echo h($voyage['Voyage']['date_debut']); ?>&nbsp;</td>
-				<td><?php echo h($voyage['Voyage']['date_fin']); ?>&nbsp;</td>
-				<td><?php echo h($voyage['Voyage']['lieu']); ?>&nbsp;</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('Voir'), array('action' => 'view', $voyage['Voyage']['voyage_id'])); ?>
-					<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $voyage['Voyage']['voyage_id']), array(), __('Etes vous sûr de vouloir supprimer le voyage %s ?', $voyage['Voyage']['voyage_name'])); ?>
-				</td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
+
+<?php foreach ($voyages as $voyage): ?>
+<div class="voyages">
+	<h4 class="voyages"><?php echo h($voyage['Voyage']['voyage_name']); ?></h4>
+
+	<div class="float">
+		<p>
+			<?php echo __("Destination "); ?>
+			<?php echo h($voyage['Voyage']['lieu']); ?>
+		</p>
+		
+		<p>
+			<?php echo __("Du "); ?>
+			<?php echo h($voyage['Voyage']['date_debut']); ?>
+			<?php echo __(" au "); ?>
+			<?php echo h($voyage['Voyage']['date_fin']); ?>
+		</p>
+	</div>
+
+	<div class="float right">
+		<?php echo $this->Html->link(__('Voir'), array('action' => 'view', $voyage['Voyage']['voyage_id'])); ?>
+		<?php echo $this->Form->postLink(__('Supprimer'), array('action' => 'delete', $voyage['Voyage']['voyage_id']), array(), __('Etes vous sûr de vouloir supprimer le voyage %s ?', $voyage['Voyage']['voyage_name'])); ?>
+	</div>
 </div>
+<?php endforeach; ?>
 
-
-<div class="voyages form">
+<div class="voyages form form_voyages">
 <?php echo $this->Form->create('Voyage', array('action' => 'add')); ?>
+	<h3><?php echo h('Ajouter un voyage'); ?></h3>
 	<fieldset>
-		<legend><?php echo __('Ajouter un voyage'); ?></legend>
 	<?php
 		$user_id = $this->session->read('Auth.User.user_id');
 
