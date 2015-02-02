@@ -39,6 +39,7 @@
  */
 
 /* general div */
+div.form,
 div.index,
 div.view {
 	float:right;
@@ -94,6 +95,10 @@ h1 {
 h2 {
 	font-size: 1.5em;
 	color: blue;
+}
+
+big {
+	font-size: 1.2em;
 }
 
 /*
@@ -166,7 +171,7 @@ input[type=submit]:active,
  */
 
 /* div pour les voyages */
-div.voyages {
+div.list_voyages {
 	background-color: #4D62BC;
 	border: 1px solid #001f9f;
 	color: black;
@@ -178,6 +183,11 @@ div.voyages {
 
 div.form_voyages {
 	background-color: #808FCF;
+}
+
+div.form_fieldset_voyages {
+	padding:0;
+	margin:0;
 }
 
 h4.voyages {

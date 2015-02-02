@@ -35,8 +35,11 @@ class UsersController extends AppController {
  * @return void
  */
 	public function index() {
+		$id = AuthComponent::user('user_id');
 		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
+
+		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+	 	$this->set('user', $this->User->find('first', $options));
 	}
 
 /**
@@ -83,7 +86,7 @@ class UsersController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('Vos modifications ont été sauvées'));
-                $this->redirect(array('action' => 'view', $id));
+                $this->redirect(array('action' => 'index'));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -105,7 +108,7 @@ class UsersController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('Votre nouveau mot de passe a été sauvé'));
-                $this->redirect(array('action' => 'view', $id));
+                $this->redirect(array('action' => 'index'));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -131,7 +134,7 @@ class UsersController extends AppController {
 			$this->logout();
 		} else {
 			$this->Session->setFlash(__('Erreur durant la suppression, veuillez réessayer'));
-            $this->redirect(array('action' => 'view', $id));
+            $this->redirect(array('action' => 'index'));
 		}
 	}
 

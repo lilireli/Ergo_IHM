@@ -68,7 +68,9 @@ h4 {
 ul, li {
 	margin: 0 12px;
 }
-
+p {
+	margin: 0 0 1em 0;
+}
 
 /** Layout **/
 #container {
@@ -114,6 +116,7 @@ ul, li {
 }
 
 /** containers **/
+div.form,
 div.index,
 div.view {
 	float:right;
@@ -256,6 +259,12 @@ dd {
 }
 
 /** Forms **/
+form {
+	clear: both;
+	margin-right: 20px;
+	padding: 0;
+	width: 95%;
+}
 fieldset {
 	border: none;
 	margin-bottom: 1em;

@@ -28,6 +28,9 @@ $GTVersion = __d('gt_dev', '1.0')
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
+
+		echo $this->Html->script('jquery_1.11.0', array('inline'=>false));
+		echo $this->Html->script('general',array('inline'=>false));
 		echo $this->fetch('script');
 	?>
 </head>
@@ -50,11 +53,11 @@ $GTVersion = __d('gt_dev', '1.0')
 					// on n'affiche les menus que si la personne est connectée
 					if ($username != NULL) {
 						// menus du bandeau
-						echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'index'));
+						echo $this->Html->link('Accueil', array('controller'=>'pages', 'action'=>'display', 'home'));
 						echo ' | ';
-						echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index', $user_id));
+						echo $this->Html->link('Voyages', array('controller'=>'voyages', 'action'=>'index'));
 						echo '|';
-						echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'view', $user_id));
+						echo $this->Html->link('Mon Compte', array('controller'=>'users', 'action'=>'index'));
 						echo ' | ...';
 					}
 				?>

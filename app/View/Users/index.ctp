@@ -1,48 +1,28 @@
 <div class="users index">
-	<h2><?php echo __('Users'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<thead>
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_name'); ?></th>
-			<th><?php echo $this->Paginator->sort('mail'); ?></th>
-			<th><?php echo $this->Paginator->sort('password'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($users as $user): ?>
-	<tr>
-		<td><?php echo h($user['User']['user_id']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['user_name']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['mail']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['user_id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['user_id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['user_id']), array(), __('Are you sure you want to delete # %s?', $user['User']['user_id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
+<h2><?php echo __('Mon compte'); ?></h2>
+	<dl>
+		<dt><?php echo __('Nom d\'utilisateur'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['user_name']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('E-mail'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['mail']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Date de naissance'); ?></dt>
+		<dd>
+			<?php echo h($user['User']['date_of_birth']); ?>
+			&nbsp;
+		</dd>
+	</dl>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Mes actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Modifier mon profil'), array('action' => 'edit', $user['User']['user_id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Modifier mon mot de passe'), array('action' => 'edit_pw', $user['User']['user_id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Supprimer mon compte'), array('action' => 'delete', $user['User']['user_id']), array(), __('Etes-vous sûr de vouloir supprimer votre compte ?')); ?> </li>
 	</ul>
 </div>

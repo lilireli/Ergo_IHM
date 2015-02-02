@@ -20,8 +20,9 @@ class VoyagesController extends AppController {
  *
  * @return void
  */
-	public function index($id) {
+	public function index() {
 		// lister uniquement les voyages d'une personne
+		$id = AuthComponent::user('user_id');
 		$this->Voyage->recursive = 0;
 
  		// equivalent SQL simple
@@ -71,7 +72,7 @@ class VoyagesController extends AppController {
 			
 			if ($this->Voyage->save($this->request->data)) {
 				$this->Session->setFlash(__('le voyage a été sauvé'));
-                $this->redirect(array('action' => 'index', $this->request->data['Voyage']['createur_id']));
+                $this->redirect(array('action' => 'index'));
 			}
 		}
 
@@ -93,7 +94,7 @@ class VoyagesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Voyage->save($this->request->data)) {
 				$this->Session->setFlash(__('le voyage a été sauvé'));
-                $this->redirect(array('action' => 'index', $this->request->data['Voyage']['createur_id']));
+                $this->redirect(array('action' => 'index'));
 			}
 		} else {
 			$options = array('conditions' => array('Voyage.' . $this->Voyage->primaryKey => $id));
@@ -117,9 +118,11 @@ class VoyagesController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Voyage->delete()) {
-			return $this->flash(__('The voyage has been deleted.'), array('action' => 'index'));
+			$this->Session->setFlash(__('le voyage a été supprimé'));
+                $this->redirect(array('action' => 'index'));
 		} else {
-			return $this->flash(__('The voyage could not be deleted. Please, try again.'), array('action' => 'index'));
+			$this->Session->setFlash(__('le voyage n\'a pas pu être supprimé'));
+            $this->redirect(array('action' => 'index'));
 		}
 	}
 

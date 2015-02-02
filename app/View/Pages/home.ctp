@@ -19,6 +19,15 @@ App::uses('Debugger', 'Utility');
 <h2>Accueil</h2>
 <p> Bienvenue sur le site d'organisation de voyages collaboratif </p>
 
-<?php echo $this->element('connexion'); ?>
-<?php echo $this->element('inscription'); ?>
+<?php
+	$username = $this->session->read('Auth.User.user_name');
+
+	if($username==NULL){
+		echo $this->element('connexion');
+		echo $this->element('inscription');
+	}
+	else {
+		echo __('youplaboum');
+	}
+?>
 

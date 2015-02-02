@@ -37,8 +37,7 @@
 		<li>
 			<?php 
 				echo $this->Html->link(__('Retourner à mon profil'), 
-					array('action' => 'view', basename($this->request->here))); 
-				// basename nous permet de récupérer l'user_id
+					array('action' => 'index'));
 			?> 
 		</li>
 	</ul>
