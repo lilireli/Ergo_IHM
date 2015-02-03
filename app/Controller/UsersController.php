@@ -155,7 +155,7 @@ class UsersController extends AppController {
 
             if ($this->Auth->login()) {
                 $this->Session->setFlash(__('Bienvenue, '. $this->Auth->user('user_name')));
-                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'index'));
+                $this->redirect(array('controller' => 'pages', 'action' => 'display', 'home'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password'));
             }
@@ -180,12 +180,36 @@ class UsersController extends AppController {
     }
 
 
-    public function get_users($id) {
-    // id est l'id du voyage
-    	$options = array('conditions' => array(
-	 		'User.user_id NOT IN (SELECT user_id FROM users_voyages WHERE voyage_id = '.$id.')'));
+    public function get_users($name) {
+    // name correspond au début de l'username de l'utilisateur
+    	$options = array(
+    		'conditions' => array(
+	 			'User.user_name LIKE \'%'.$name.'%\''
+	 		),
+	 		'fields' => array('user_name', 'user_id')
+	 	);
 
 	 	return $this->User->find('all', $options);
 	}
+
+
+	public function autoComplete(){
+        // On recherche tous les participants qui n'appartiennent pas au voyage $id
+
+       	$this->autoRender=false;
+	    $this->layout = 'ajax';
+	    $name = $_GET['term'];
+	    $participants = $this->get_users($name);
+
+	    $i=0;
+	    foreach($participants as $participant){
+	        $response[$i]['id']=$participant['User']['user_id'];
+	        $response[$i]['label']=$participant['User']['user_name'];
+	        $response[$i]['value']=$participant['User']['user_name'];
+	        $i++;
+	    }
+	   
+	    echo json_encode($response);
+    }
 
 }

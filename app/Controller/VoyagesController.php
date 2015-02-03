@@ -94,7 +94,7 @@ class VoyagesController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Voyage->save($this->request->data)) {
 				$this->Session->setFlash(__('le voyage a été sauvé'));
-                $this->redirect(array('action' => 'index'));
+                $this->redirect(array('action' => 'view', $id));
 			}
 		} else {
 			$options = array('conditions' => array('Voyage.' . $this->Voyage->primaryKey => $id));

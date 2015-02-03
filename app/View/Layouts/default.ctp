@@ -23,6 +23,7 @@ $GTVersion = __d('gt_dev', '1.0')
 
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('gt.generic');
+		echo $this->Html->css('autocomplete');
 		// les paramètres de style de GroupTrotteur viennent écraser
 		// Les réglages embétants de CakePHP mais certains sont conservés
 
@@ -30,6 +31,7 @@ $GTVersion = __d('gt_dev', '1.0')
 		echo $this->fetch('css');
 
 		echo $this->Html->script('jquery_1.11.0', array('inline'=>false));
+		echo $this->Html->script('jquery-ui.min', array('inline'=>false));
 		echo $this->Html->script('general',array('inline'=>false));
 		echo $this->fetch('script');
 	?>

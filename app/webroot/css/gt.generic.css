@@ -181,6 +181,11 @@ div.list_voyages {
 	padding: 1%;
 }
 
+div.view_voyages {
+	float:left;
+	width: 50%;
+}
+
 div.form_voyages {
 	background-color: #808FCF;
 }
@@ -193,4 +198,13 @@ div.form_fieldset_voyages {
 h4.voyages {
 	font-size: 2em;
 	color: #E8730C;
+}
+
+div.field_participants{
+	display: inline-block;
+	background-color: #CCCCCC;
+	border: 1px solid #000000;
+	color: black;
+	margin: 2%;
+	padding: 0;
 }
