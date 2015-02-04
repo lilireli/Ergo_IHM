@@ -1,27 +1,49 @@
-<div class="voyages form">
-<?php echo $this->Form->create('Voyage'); ?>
-	<fieldset>
-		<legend><?php echo __('Add Voyage'); ?></legend>
-	<?php
-		$user_id = $this->session->read('Auth.User.user_id');
+<div class="voyages">
+	<h3><?php echo __("Créer un nouveau voyage"); ?></h3>
 
-		echo $this->Form->input('voyage_name');
-		echo $this->Form->input('date_debut');
-		echo $this->Form->input('date_fin');
-		echo $this->Form->input('lieu');
-		echo $this->Form->input('createur_id', 
-			array('type' => 'text', 'default' => $user_id));
-		echo $this->Form->input('User');		
-	?>
+    <?php echo $this->Form->create('Voyage', array('action' => 'add')); ?>
+	<fieldset>
+		<?php 
+			$user_id = $this->session->read('Auth.User.user_id'); 
+
+			echo $this->Form->input('voyage_name', array('label'=>'Nom du voyage'));
+			echo $this->Form->input('lieu', array('label'=>'Lieu'));
+		?>
+
+		<div class='float'>
+			<?php 
+				echo $this->Form->input('date_debut', array(
+					'label'=>'Du',
+					'dateFormat' => 'DMY',
+    				'minYear' => date('Y'),
+    				'maxYear' => date('Y') + 10,
+				)); 
+			?>
+		</div>
+		<div class='float'>
+			<?php 
+				echo $this->Form->input('date_fin', array(
+					'label'=>'Au',
+					'dateFormat' => 'DMY',
+    				'minYear' => date('Y'),
+    				'maxYear' => date('Y') + 10,
+				)); 
+			?>
+		</div>
+
+		<?php
+			echo $this->Form->input('createur_id', 
+				array('type' => 'hidden', 'default' => $user_id));
+			echo $this->Form->input('User',
+				array('type' => 'hidden', 'default' => $user_id));
+		?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+	<?php echo $this->Form->end(__('Créer')); ?>
 </div>
+
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-
-		<li><?php echo $this->Html->link(__('List Voyages'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Users Voyages'), array('controller' => 'users_voyages', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Users Voyages'), array('controller' => 'users_voyages', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Revenir à mes voyages'), array('action' => 'index')); ?></li>
 	</ul>
 </div>

@@ -20,4 +20,40 @@ class Etape extends AppModel {
  * @var string
  */
 	public $displayField = 'etape_name';
+
+	public $belongsTo = array(
+        'Voyage' => array(
+            'className' => 'Voyage',
+            'foreignKey' => 'voyage_id'
+        ),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'createur_id'
+        )
+    );
+
+    public $validate = array(
+		'etape_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+			),
+		),
+		'etape_name' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Un nom d\'étape est requis.'
+			),
+		),
+        'date_fin' => array(
+            'compare' => array(
+                'rule'	     => array('validate_date'),
+                'message'    => 'La date de fin doit être après la date de début.',
+                'allowEmpty' => true
+            )
+        )
+	);
+
+	public function validate_date() {
+    	return $this->data[$this->alias]['date_fin'] > $this->data[$this->alias]['date_debut'];
+	}	
 }

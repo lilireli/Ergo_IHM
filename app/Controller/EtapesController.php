@@ -9,7 +9,7 @@ class EtapesController extends AppController {
 		$this->set('etape', $id);
 	}
 
-	public function add() {
+	public function add($voyage_id) {
 		if ($this->request->is('post')) {
 			$this->Etape->create();
 			

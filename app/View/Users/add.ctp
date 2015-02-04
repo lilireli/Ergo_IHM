@@ -27,6 +27,6 @@
 		));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Créer mon compte')); ?>
-</div>
+	<?php echo $this->Form->end(__('Créer mon compte')); ?>
+	</div>
 </div>

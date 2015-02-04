@@ -59,10 +59,24 @@
 			</div>
 
 			<div class='float form_fieldset_voyages'>
-				<?php echo $this->Form->input('date_debut', array('label'=>'Du')); ?>
+				<?php 
+					echo $this->Form->input('date_debut', array(
+						'label'=>'Du',
+						'dateFormat' => 'DMY',
+	    				'minYear' => date('Y'),
+	    				'maxYear' => date('Y') + 10,
+    				)); 
+    			?>
 			</div>
 			<div class='float form_fieldset_voyages'>
-				<?php echo $this->Form->input('date_fin', array('label'=>'Au')); ?>
+				<?php 
+					echo $this->Form->input('date_fin', array(
+						'label'=>'Au',
+						'dateFormat' => 'DMY',
+	    				'minYear' => date('Y'),
+	    				'maxYear' => date('Y') + 10,
+    				)); 
+    			?>
 			</div>
 
 			<?php
