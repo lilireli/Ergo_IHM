@@ -200,10 +200,12 @@ h4.voyages {
 	color: #E8730C;
 }
 
+/* apparait lorsque l'on ajoute un participant (suite autocompletion) */
 div.field_participants{
 	display: inline-block;
 	background-color: #CCCCCC;
 	border: 1px solid #000000;
+	height: 2em;
 	color: black;
 	margin: 2%;
 	padding: 0;

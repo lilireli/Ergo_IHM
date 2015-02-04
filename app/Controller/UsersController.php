@@ -180,11 +180,14 @@ class UsersController extends AppController {
     }
 
 
-    public function get_users($name) {
+    public function get_users($name, $id) {
     // name correspond au début de l'username de l'utilisateur
+    // ne récupérer que les noms qui matches avec name et qui ne sont pas déjà dans le voyage
+    // cela empêche les inclusions multiples
     	$options = array(
     		'conditions' => array(
-	 			'User.user_name LIKE \'%'.$name.'%\''
+	 			'User.user_name LIKE \'%'.$name.'%\'',
+	 			'User.user_id NOT IN (SELECT user_id FROM users_voyages WHERE voyage_id = '.$id.')'
 	 		),
 	 		'fields' => array('user_name', 'user_id')
 	 	);
@@ -199,7 +202,8 @@ class UsersController extends AppController {
        	$this->autoRender=false;
 	    $this->layout = 'ajax';
 	    $name = $_GET['term'];
-	    $participants = $this->get_users($name);
+	    $voyage_id = $_GET['voyage'];
+	    $participants = $this->get_users($name, $voyage_id);
 
 	    $i=0;
 	    foreach($participants as $participant){

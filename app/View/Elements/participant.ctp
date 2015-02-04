@@ -9,7 +9,8 @@
 	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
-					<th><h2><?php echo __('Trotteurs'); ?></h2></th>
+				<th><h2><?php echo __('Trotteurs'); ?></h2></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -17,6 +18,9 @@
 			<tr>
 				<td>
 					<?php echo h($participant['User2']['user_name']); ?>&nbsp;
+				</td>
+				<td class="actions">
+					<?php echo $this->Html->link(__('Supprimer'), array('controller' => 'voyages', 'action' => 'delete_participant', $voyage_id, $participant['User2']['user_id']));?>
 				</td>
 			</tr>
 			<?php endforeach; ?>
@@ -48,7 +52,7 @@
 						    <fieldset>
 						        <?php 
 						        	echo $this->Form->input('voyage_id', 
-						        		array('type'=>'hidden', 'default'=>$voyage_id));
+						        		array('type'=>'hidden', 'default'=>$voyage_id, 'id'=>'voyage_id'));
 						        ?>
 
 						        <div id='trotteurs'>

@@ -71,7 +71,7 @@ class VoyagesController extends AppController {
 			$this->Voyage->create();
 			
 			if ($this->Voyage->save($this->request->data)) {
-				$this->Session->setFlash(__('le voyage a été sauvé'));
+				$this->Session->setFlash(__('Le voyage a été sauvé'));
                 $this->redirect(array('action' => 'index'));
 			}
 		}
@@ -93,7 +93,7 @@ class VoyagesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Voyage->save($this->request->data)) {
-				$this->Session->setFlash(__('le voyage a été sauvé'));
+				$this->Session->setFlash(__('Le voyage a été sauvé'));
                 $this->redirect(array('action' => 'view', $id));
 			}
 		} else {
@@ -118,10 +118,10 @@ class VoyagesController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Voyage->delete()) {
-			$this->Session->setFlash(__('le voyage a été supprimé'));
+			$this->Session->setFlash(__('Le voyage a été supprimé'));
                 $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('le voyage n\'a pas pu être supprimé'));
+			$this->Session->setFlash(__('Le voyage n\'a pas pu être supprimé'));
             $this->redirect(array('action' => 'index'));
 		}
 	}
@@ -158,7 +158,8 @@ class VoyagesController extends AppController {
 		 		)
 	 		),
 	 		'fields'=> array(
-	 			'User2.user_name'
+	 			'User2.user_name',
+	 			'User2.user_id'
 	 		));
 
 	 	return $this->Voyage->find('all', $options);
@@ -169,7 +170,7 @@ class VoyagesController extends AppController {
 			$this->Voyage->create();
 
 			if ($this->Voyage->save($this->request->data)) {
-				$this->Session->setFlash(__('les participants ont été ajoutés'));
+				$this->Session->setFlash(__('Les participants ont été ajoutés'));
                 $this->redirect(array(
                 	'action' => 'view', 
                 	$this->request->data['Voyage']['voyage_id']));
@@ -178,6 +179,25 @@ class VoyagesController extends AppController {
 
 		$users = $this->Voyage->find('list');
 		$this->set(compact('users'));
+	}
+
+	public function delete_participant($voyage_id, $user_id) {
+		if(empty($voyage_id) || empty($user_id)){
+			throw new NotFoundException(__('Invalid voyage and user'));
+		} 
+
+	    $delete = $this->Voyage->UsersVoyage->deleteAll(array(
+	        'UsersVoyage.voyage_id' => $voyage_id, 
+	        'UsersVoyage.user_id' => $user_id
+	    ));
+
+	    if ($delete) {
+    		$this->Session->setFlash(__('Le participant a été supprimé'));
+            $this->redirect(array('action' => 'view', $voyage_id));
+		} else {
+			$this->Session->setFlash(__('le participant n\'a pas pu être supprimé'));
+            $this->redirect(array('action' => 'index', $voyage_id));
+		}
 	}
 
 }

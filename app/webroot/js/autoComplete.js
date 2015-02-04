@@ -3,9 +3,12 @@ $(document).ready(function(){
 
 	var myselect = document.getElementById("participants"); //select the name already entered 
 	var name = myselect.value;
+
+	var voyage = document.getElementById("voyage_id");
+	var voyage_id = voyage.value;
 	
 	$("#participants").autocomplete({
-	    source: "/users/autoComplete/" + name,
+	    source: "/users/autoComplete/?voyage=82&" + name, // appeler le fichier php qui nous renverra les noms possibles
 	    minLength: 2, //This is the min ammount of chars before autocomplete kicks in
 	    
 	    // when field is selected keep the user, create the id
@@ -17,7 +20,7 @@ $(document).ready(function(){
 	        var text = 
 	        	"<div class='field_participants' id='participant"+trotteur_id+"'>" +  
 					"<div class='float'>"+ trotteur +
-						"<input type='checkbox' value='"+trotteur_id+"' name='data[User]["+trotteur+"]' checked>" +
+						"<input type='hidden' value='"+trotteur_id+"' name='data[User]["+trotteur+"]' checked>" +
 					"</div>" +
 					"<div class='float right' id='x_participant"+trotteur_id+"'>x</div>" +
 				"</div>";
