@@ -1,5 +1,6 @@
 // champs qui peuvent s'agrandir et se réduire
 $(document).ready(function() {
+    // gestion des dates sur la frise
     var days = document.getElementById("nombre_days").innerHTML; 
     var date_start = new Date(document.getElementById("date_debut").innerHTML*1000); 
     var text = '';
@@ -15,7 +16,7 @@ $(document).ready(function() {
         var mois=months[current_date.getMonth()];
 
         text = text + 
-            '<div class="days" style="left:'+width_day*i+'px; width:'+width_day+'px;">' +
+            '<div class="frise list_days" style="left:'+width_day*i+'px; width:'+width_day+'px;">' +
                 jour + '<br>' + mois +
             '</div>'
 
@@ -25,4 +26,15 @@ $(document).ready(function() {
     };
 
     $('#frise_voyage').append(text);
+
+    // gérer le scroll de la frise
+    $('#move_right').click(function() {
+        var pos = $("#frise_voyage").position();
+        $("#frise_voyage").css({left: pos.left - 100});
+    })
+
+    $('#move_left').click(function() {
+        var pos = $("#frise_voyage").position();
+        $("#frise_voyage").css({left: pos.left + 100});
+    })
 });

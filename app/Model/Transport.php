@@ -20,4 +20,19 @@ class Transport extends AppModel {
  * @var string
  */
 	public $displayField = 'transport_name';
+
+	public $belongsTo = array(
+        'Etape' => array(
+            'className' => 'Etape',
+            'foreignKey' => 'etape_debut'
+        ),
+        'Etape' => array(
+            'className' => 'Etape',
+            'foreignKey' => 'etape_fin'
+        ),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'createur_id'
+        )
+    );
 }

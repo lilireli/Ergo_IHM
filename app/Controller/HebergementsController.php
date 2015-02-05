@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
  *
  */
 class HebergementsController extends AppController {
-	public function add() {
+	public function add($etape_id) {
 		if ($this->request->is('post')) {
 			$this->Hebergement->create();
 			
@@ -50,7 +50,6 @@ class HebergementsController extends AppController {
 	 			'Hebergement.date_fin',
 	 			'Hebergement.createur_id',
 	 			'Hebergement.lieu',
-	 			'Hebergement.note',
 	 			'Hebergement.prix',
 	 			'Hebergement.accepte',
 	 			'count(Vote.type_id) AS count_hebergement'

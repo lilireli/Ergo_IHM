@@ -19,6 +19,10 @@
 #footer {
 	background-color: #001f9f;
 	color: #ffffff;
+	height: 20px;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
 }
 
 #header #links{
@@ -38,10 +42,7 @@
  *
  */
 
-div#content {
-	margin:0;
-	padding:0;
-}
+
 
 /* general div */
 div.form,
@@ -171,6 +172,10 @@ input[type=submit]:active,
     background-color: blue;
 }
 
+div.general_voyage {
+	padding-bottom: 200px;
+}
+
 /*
  * Liste des voyages 
  */
@@ -217,56 +222,77 @@ div.field_participants{
 }
 
 /*
- * Liste des étapes 
+ * Gestion de la frise
  */
-div.view_etapes {
-	position:relative;
+div.frise{
+	position:absolute;
+	text-align: center;
+}
+
+div.frise_background {
+	position:fixed;
+	bottom:20px;
 	background-color: #8291D0;
-	width: 200%;
-	left: 0;
-	top:0;
-	margin: 0;
-	margin-bottom: -5px;
+	width: 100%;
 	height: 100px;
-	overflow:hidden; /* permettre le scroll */
-	white-space:nowrap;
-	border: 4px solid #FFFFFF;
+	margin: 0;
+	padding: 0;
+	left:0;
+	margin-bottom: 8px;
+	border-top: 4px solid #000000;
+}
+
+div.frise_general {
+	position:fixed;
+	bottom:20px;
+	width: 100%;
+	height: 100px;
+	margin-bottom: 8px;
 }
 
 /* div pour les étapes */
-div.days {
+div.list_days {
 	display: inline-block;
-	position:fixed;
 	height: 100px;
 	color: 	#4C4C4C;
 	border-left: 2px dashed #4C4C4C;
 	z-index: 1;
-	text-align: center;
 }
 
 div.list_etapes {
 	display: inline-block;
-	position:fixed;
 	background-color: #ED8F3D;
 	border: 1px solid #001f9f;
 	height: 50px;
 	color: black;
 	margin-top: 40px;
-	z-index: 10;
+	z-index: 3;
 }
 
 div.list_transport {
 	display: inline-block;
-	position:fixed;
 	background-color: #E8730C;
 	border: 1px solid #001f9f;
 	height: 40px;
 	color: black;
 	margin-top: 45px;
-	z-index: 15;
+	z-index: 2;
 }
 
 div.phantom_etape {
 	background-color: #DDDDDD;
-	z-index: 10;
+	z-index: 3;
+}
+
+div.frise_move_right {
+	position:fixed;
+	right: 0;
+	font-size: 2em;
+	z-index: 4;
+}
+
+div.frise_move_left {
+	position:fixed;
+	font-size: 2em;
+	z-index: 4;
 }

@@ -13,20 +13,26 @@ class TransportsController extends AppController {
 				// rediriger vers la page de l'étape
 				$this->Session->setFlash(__("Le transport a été sauvé."));
 				$this->redirect(array(
-					'controller' => 'etapes', 
-					'action' => 'index', 
-					$this->request->data['Transport']['etape_id']
+					'controller' => 'transports', 
+					'action' => 'view', 
+					$this->request->data['Transport']['etape_debut'],
+					$this->request->data['Trasnport']['etape_fin'],
+					$this->request->data['Transport']['url']
 				));
 			}
 		}
 	}
 
-	public function view($id) {
-	// parameter: one etape id
+	public function view($etape_debut, $etape_fin) {
+		$condition = array();
+
+		if($etape_debut == 0){ $etape_debut = null;}
+		if($etape_fin == 0){ $etape_fin = null; }
 
 		$options = array(
 			'conditions' => array(
-				'Transport.etape_id' => $id
+				'Transport.etape_debut' => $etape_debut,
+				'Transport.etape_fin' => $etape_fin
 			),
 			'joins' => array(
 	 			array(
@@ -44,7 +50,6 @@ class TransportsController extends AppController {
 	 		),
 	 		'fields' => array(
 	 			'Transport.transport_id',
-	 			'Transport.transport_name',
 	 			'Transport.type',
 	 			'Transport.date_debut',
 	 			'Transport.date_fin',
@@ -56,6 +61,10 @@ class TransportsController extends AppController {
 	 			'count(Vote.type_id) AS count_transport'
 	 		));
 		
-		return $this->Transport->find('all', $options);
+		$this->set('transports', array(
+			'res' => $this->Transport->find('all', $options),
+			'etape_debut' => $etape_debut,
+			'etape_fin' => $etape_fin
+		));
 	}
 }

@@ -11,7 +11,7 @@ class ActivitesController extends AppController {
 			
 			if ($this->Activite->save($this->request->data)) {
 				// rediriger vers la page de l'étape
-				$this->Session->setFlash(__("L'activité a été sauvé."));
+				$this->Session->setFlash(__("L'activité a été sauvée."));
 				$this->redirect(array(
 					'controller' => 'etapes', 
 					'action' => 'index', 
@@ -50,7 +50,6 @@ class ActivitesController extends AppController {
 	 			'Activite.date_fin',
 	 			'Activite.createur_id',
 	 			'Activite.lieu',
-	 			'Activite.note',
 	 			'Activite.prix',
 	 			'Activite.accepte',
 	 			'count(Vote.type_id) AS count_activite'

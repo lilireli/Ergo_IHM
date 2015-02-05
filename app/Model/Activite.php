@@ -20,4 +20,15 @@ class Activite extends AppModel {
  * @var string
  */
 	public $displayField = 'activite_name';
+
+	public $belongsTo = array(
+        'Etape' => array(
+            'className' => 'Etape',
+            'foreignKey' => 'etape_id'
+        ),
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'createur_id'
+        )
+    );
 }

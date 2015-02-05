@@ -77,7 +77,7 @@ $GTVersion = __d('gt_dev', '1.0')
 				?>
 			</div>
 		</div>
-		<div id="content">
+		<div id="content" class="content">
 
 			<?php echo $this->Session->flash(); ?>
 
