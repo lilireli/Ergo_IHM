@@ -21,8 +21,23 @@ class HebergementsController extends AppController {
 		}
 	}
 
+	public function edit($id = null) {
+		if (!$this->Hebergement->exists($id)) {
+			throw new NotFoundException(__('Invalid hebergement'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			debug($this->data); 
+			if ($this->Hebergement->save($this->request->data)) {
+				$this->Session->setFlash(__('Vos modifications ont été sauvées'));
+                $this->redirect(array('controller' => 'hebergements', 'action' => 'view', $this->request->data['Hebergement']['url']));
+			}
+		}
+	}
+
 	public function view($id) {
-	// parameter: one voyage id
+	// parameter: one etape id
+		$id = strtok($id, "?");
+		$user_id= AuthComponent::user('user_id');
 
 		$options = array(
 			'conditions' => array(
@@ -36,6 +51,15 @@ class HebergementsController extends AppController {
 		 			'conditions' => array(
 		 				'Hebergement.hebergement_id = Vote.type_id',
 		 				'Vote.type_name = "hebergement"'
+		 			)
+	 			),
+	 			array(
+		 			'table' => 'votes',
+		 			'alias' => 'Vote2',
+		 			'type' => 'left outer',
+		 			'conditions' => array(
+		 				'Vote.vote_id = Vote2.vote_id',
+		 				'Vote2.user_id' => $user_id
 		 			)
 	 			)
 	 		),
@@ -52,9 +76,11 @@ class HebergementsController extends AppController {
 	 			'Hebergement.lieu',
 	 			'Hebergement.prix',
 	 			'Hebergement.accepte',
-	 			'count(Vote.type_id) AS count_hebergement'
-			));
+	 			'count(Vote.type_id) AS count_hebergement',
+	 			'count(Vote2.type_id) AS count_user'
+			),
+			'order' => array('Hebergement.accepte DESC', 'count_hebergement DESC'),);
 		
-		return $this->Hebergement->find('all', $options);
+		$this->set('hebergements', $this->Hebergement->find('all', $options));
 	}
 }

@@ -1,40 +1,48 @@
+<?php 
+	$voyage_id = $voyage['Voyage']['voyage_id']; 
+	$seconds = strtotime($voyage['Voyage']['date_fin']) - strtotime($voyage['Voyage']['date_debut']);
+	$days = floor($seconds/(3600*24));
+?>
+
 <div class="general_voyage">
-	<div class="view_voyages float">
-		<h2><?php echo h($voyage['Voyage']['voyage_name']); ?></h2>
+	<div class="general_voyage view_voyages float">
+		<h1><?php echo h(ucfirst(strtolower($voyage['Voyage']['voyage_name']))); ?></h1>
 
-		<p>
-			<?php echo __('Du '); ?>
-			<?php echo h($voyage['Voyage']['date_debut']); ?>
-			<?php echo __(' au '); ?>
-			<?php echo h($voyage['Voyage']['date_fin']); ?>
-		</p>
-
-		<p>
-			<?php echo __('A '); ?>
-			<?php echo h($voyage['Voyage']['lieu']); ?>
-		</p>
+		<dl>
+			<dt><?php echo __('Du '); ?></dt>
+			<dd><?php echo h($voyage['Voyage']['date_debut']); ?></dd>
+			<dt><?php echo __(' Au '); ?></dt>
+			<dd><?php echo h($voyage['Voyage']['date_fin']); ?></dd>
+			<dt><?php echo __('Destination'); ?></dt>
+			<dd><?php echo h(ucfirst(strtolower($voyage['Voyage']['lieu']))); ?></dd>
+		</dl>
 
 		<div class="actions">
 			<h3><?php echo __('Actions'); ?></h3>
 			<ul>
 				<li><?php echo $this->Html->link(__('Modifier'), array('action' => 'edit', $voyage['Voyage']['voyage_id'])); ?> </li>
+				<li><?php 
+					echo $this->Html->link(__('Ajouter une étape'), 
+						array(
+							'controller' => 'etapes',
+							'action' => 'add', 
+							$voyage['Voyage']['voyage_id'].
+								'?voyage_id='.$voyage_id.
+								'&days='.$days.
+								'&date_debut='.$voyage['Voyage']['date_debut'])); 
+				?></li>
 				<li><?php echo $this->Html->link(__('Retour à mes voyages'), array('action' => 'index')); ?> </li>
 			</ul>
 		</div>
 	</div>
 
-	<div class="view_voyages float right">
-		<?php $voyage_id = $voyage['Voyage']['voyage_id']; ?>
-
+	<div class="general_voyage view_voyages right">
 		<?php echo $this->element('participant',  array('voyage_id' => $voyage_id)); ?>
 	</div>
 </div>
 
 
 <?php 
-	$seconds = strtotime($voyage['Voyage']['date_fin']) - strtotime($voyage['Voyage']['date_debut']);
-	$days = floor($seconds/(3600*24));
-
 	echo $this->element('frise', array(
 		'voyage_id' => $voyage_id,
 		'days' => $days,

@@ -3,24 +3,22 @@
 		array('controller'=>'Voyages', 'action'=>'participants', $voyage_id)); 
 ?>
 
-
-
 <div class="view participants">
 	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
 				<th><h2><?php echo __('Trotteurs'); ?></h2></th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ($participants as $participant): ?>
 			<tr>
 				<td>
-					<?php echo h($participant['User2']['user_name']); ?>&nbsp;
-				</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('Supprimer'), array('controller' => 'voyages', 'action' => 'delete_participant', $voyage_id, $participant['User2']['user_id']));?>
+					<?php echo h(ucfirst(strtolower($participant['User2']['user_name']))); ?>&nbsp;
+
+					<div class="float right">
+						<?php echo $this->Html->link(__('Supprimer'), array('controller' => 'voyages', 'action' => 'delete_participant', $voyage_id, $participant['User2']['user_id']));?>
+					</div>
 				</td>
 			</tr>
 			<?php endforeach; ?>

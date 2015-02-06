@@ -3,12 +3,12 @@
 
 <?php foreach ($voyages as $voyage): ?>
 <div class="list_voyages">
-	<h4 class="voyages"><?php echo h($voyage['Voyage']['voyage_name']); ?></h4>
+	<h4><?php echo h(ucfirst(strtolower($voyage['Voyage']['voyage_name']))); ?></h4>
 
 	<div class="float">
 		<p><b>
 			<?php echo __("Destination "); ?>
-			<?php echo h($voyage['Voyage']['lieu']); ?>
+			<?php echo h(ucfirst(strtolower($voyage['Voyage']['lieu']))); ?>
 		</b></p>
 		
 		<p>

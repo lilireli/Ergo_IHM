@@ -3,7 +3,6 @@
 
 	<?php echo $this->Form->create('User', array('action' => 'add')); ?>
 	<fieldset>
-		<legend><?php echo __("S'inscrire"); ?></legend>
 	<?php
 		echo $this->Form->input('user_name', array('label' => "Nom d'utilisateur"));
 		echo $this->Form->input('mail', array('label' => "E-mail"));

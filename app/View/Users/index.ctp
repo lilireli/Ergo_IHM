@@ -1,5 +1,5 @@
-<div class="users index">
-<h2><?php echo __('Mon compte'); ?></h2>
+<div>
+<h1><?php echo __('Mon compte'); ?></h1>
 	<dl>
 		<dt><?php echo __('Nom d\'utilisateur'); ?></dt>
 		<dd>

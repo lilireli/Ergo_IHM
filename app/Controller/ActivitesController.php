@@ -23,6 +23,8 @@ class ActivitesController extends AppController {
 
 	public function view($id) {
 	// parameter: one etape id
+		$id = strtok($id, "?");
+		$user_id= AuthComponent::user('user_id');
 
 		$options = array(
 			'conditions' => array(
@@ -36,6 +38,15 @@ class ActivitesController extends AppController {
 		 			'conditions' => array(
 		 				'Activite.activite_id = Vote.type_id',
 		 				'Vote.type_name = "activite"'
+		 			)
+	 			),
+	 			array(
+		 			'table' => 'votes',
+		 			'alias' => 'Vote2',
+		 			'type' => 'left outer',
+		 			'conditions' => array(
+		 				'Vote.vote_id = Vote2.vote_id',
+		 				'Vote2.user_id' => $user_id
 		 			)
 	 			)
 	 		),
@@ -52,9 +63,10 @@ class ActivitesController extends AppController {
 	 			'Activite.lieu',
 	 			'Activite.prix',
 	 			'Activite.accepte',
-	 			'count(Vote.type_id) AS count_activite'
+	 			'count(Vote.type_id) AS count_activite',
+	 			'count(Vote2.type_id) AS count_user'
 			));
 		
-		return $this->Activite->find('all', $options);
+		$this->set('activites', $this->Activite->find('all', $options));
 	}
 }

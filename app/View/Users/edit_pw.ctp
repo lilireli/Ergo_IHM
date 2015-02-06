@@ -1,5 +1,5 @@
 <div class="users form">
-<h2><?php echo __('Modifier mon mot de passe')?></h2>
+<h3><?php echo __('Modifier mon mot de passe')?></h3>
 
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>

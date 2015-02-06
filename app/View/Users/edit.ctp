@@ -1,10 +1,9 @@
-<div class="users form">
-<h2><?php echo __('Gestion de mon compte')?></h2>
+<div>
+<h3><?php echo __('Gestion de mon compte')?></h3>
 
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
-		<legend><?php echo __('Mes données'); ?></legend>
-	<?php
+		<?php
 		echo $this->Form->input('user_id', array(
 			'type' => 'hidden'));
 		echo $this->Form->input('user_name', array('label' => "Nom d'utilisateur"));

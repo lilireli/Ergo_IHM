@@ -1,9 +1,8 @@
-<div class="users form">
+<div class="form">
 	<h3><?php echo __("Inscription"); ?></h3>
 
 	<?php echo $this->Form->create('User'); ?>
 	<fieldset>
-		<legend><?php echo __("S'inscrire"); ?></legend>
 	<?php
 		echo $this->Form->input('user_name', array('label' => "Nom d'utilisateur"));
 		echo $this->Form->input('mail', array('label' => "E-mail"));

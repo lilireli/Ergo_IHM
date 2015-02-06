@@ -16,18 +16,18 @@ endif;
 App::uses('Debugger', 'Utility');
 ?>
 
-<h2>Accueil</h2>
-<p> Bienvenue sur le site d'organisation de voyages collaboratif </p>
-
 <?php
 	$username = $this->session->read('Auth.User.user_name');
 
 	if($username==NULL){
-		echo $this->element('connexion');
 		echo $this->element('inscription');
+		echo $this->element('connexion');		
 	}
 	else {
-		echo __('youplaboum');
+		?>
+		<h1>Accueil</h1>
+		<p> Bienvenue sur le site d'organisation de voyages collaboratif </p>
+		<?php
 	}
 ?>
 

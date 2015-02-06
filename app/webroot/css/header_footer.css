@@ -1,0 +1,95 @@
+/*
+ *	Header and footer
+ */
+#header {
+	background-color: #001f9f;
+	color: #ffffff;	
+	font-weight: normal;
+	height: 50px;
+	padding: 10px 20px;
+}
+
+#footer {
+	background-color: #001f9f;
+	color: #ffffff;
+	height: 20px;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	clear: both;
+	padding: 6px 10px;
+}
+
+#header #links{
+	display: inline;
+	position: relative;
+	font-size: 2em;
+}
+
+#header #userConnection{
+	display: inline;
+	position:relative;
+	font-size: 1em;
+}
+
+.header a {
+	font-weight: normal;
+	color: #ffffff;
+}
+
+.header a:hover {
+	color: #EF9D55;
+}
+
+.userActions .active a {
+	color: #E8730C;
+	font-weight: bold;
+}
+
+#header div{
+	float:left;
+}
+
+#links {
+	position: fixed;
+	left: 25%;
+	bottom: -10px;
+}
+
+.header_onglets {
+    list-style-type : none;
+    margin: 0;
+}
+
+.header_onglets li {
+	float : left;
+    background-color: #001f9f;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 3px solid #ffffff;
+    border-right: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    margin: 0;
+    margin-left: -3px; /* enlever la bordure */
+}
+
+.header_onglets .active {
+	background-color: #E8730C;
+}
+
+#userChoices {
+	position:absolute;
+	top:5px;
+	right:15px;
+}
+
+.userActions {
+	padding-left: 20px;
+	padding-top: 5px;
+}
+
+#cake-powered {
+	position: fixed;
+	right:5px;
+}

@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="frise list_etapes phantom_etape" style="left:<?php echo __($left_end); ?>px; width:50px;">
-			<?php echo __("Arrivée"); ?>
+			<?php echo __("Retour"); ?>
 		</div>
 
 		<?php 
@@ -80,13 +80,14 @@
 
 			<!-- ETAPES -->
 			<div class="frise list_etapes" 
-				style="left:<?php echo __($left); ?>px; width:<?php echo __($width); ?>px;">
-				<?php echo h($etape['Etape']['etape_name']); ?> 
+				style="left:<?php echo __($left); ?>px; width:<?php echo __($width); ?>px;"
+				id="etape<?php echo __($etape['Etape']['etape_id']); ?>">
+				<?php echo h(ucfirst(strtolower($etape['Etape']['etape_name']))); ?> 
 				<?php echo $this->Html->link(__('Voir'), 
 					array(
 						'controller' => 'etapes', 
 						'action' => 'index', 
-						$etape['Etape']['etape_id'].'?voyage_id='.$voyage_id.'&days='.$days.'&date_debut='.$date_debut
+						$etape['Etape']['etape_id'].'?voyage_id='.$voyage_id.'&days='.$days.'&date_debut='.$date_debut.'&etape_name='.$etape['Etape']['etape_name']
 					)); 
 				?>
 			</div>
@@ -97,59 +98,35 @@
 			?>
 		<?php endforeach; ?>
 
+		<!-- PLACEMENT -->
+		<?php 
+			// récupérer tous les temps pour placer correctement les div
+			$seconds = $transport_debut - strtotime($date_debut);
+			$left_t = (floor($seconds/(3600*24)))*$width_day - $width_transport/2;
+ 
+			$width_t = $left_end - $left_t;
+		?>
 
-		<!-- Créer et supprimer des étapes-->
-		<div class="hidden form_voyages" id="wrapper">
-		    <div id="small2">
-		        <?php echo $this->Html->image('add_button_orange.png', array('height'=>'20px'));?>
-		        <big><?php echo h('Créer une nouvelle étape'); ?></big>
-		    </div>
-		    <div id="normal2">
-		    	<div class='float'>
-			    	<?php echo $this->Html->image('add_button_orange.png', array('height'=>'20px'));?>
-			        <big><?php echo h('Créer une nouvelle étape'); ?></big>
-			    </div>
-		        <div class='float right' id="reduire2">
-		        	<?php echo __('Réduire'); ?>
-		        </div>
+		<!-- TRANSPORT -->
+		<div class="frise list_transport" 
+			style="left:<?php echo __($left_t); ?>px; width:<?php echo __($width_t); ?>px;">
+			<?php echo __("Transport"); ?>
 
-				<?php echo $this->Form->create('Etape', array('action' => 'add')); ?>
-			    <fieldset>
-			        <?php $user_id = $this->session->read('Auth.User.user_id'); ?>
-
-			        <?php echo $this->Form->input('etape_name', array('label'=>'Lieu')); ?>
-
-			    	<div class='float form_fieldset_voyages'>
-						<?php 
-							echo $this->Form->input('date_debut', array(
-								'label'=>'Du',
-								'dateFormat' => 'DMY',
-			    				'minYear' => date('Y'),
-			    				'maxYear' => date('Y') + 10,
-							)); 
-						?>
-					</div>
-					<div class='float form_fieldset_voyages'>
-						<?php 
-							echo $this->Form->input('date_fin', array(
-								'label'=>'Au',
-								'dateFormat' => 'DMY',
-			    				'minYear' => date('Y'),
-			    				'maxYear' => date('Y') + 10,
-							)); 
-						?>
-					</div>
-
-					<?php
-						echo $this->Form->input('voyage_id',
-			        		array('type' => 'hidden', 'default' => $voyage_id));
-
-			        	echo $this->Form->input('createur_id',
-			        		array('type' => 'hidden', 'default' => $user_id));
-			    	?>
-			    </fieldset>
-				<?php echo $this->Form->end(__('Créer')); ?>
-			</div>  
+			<?php 
+				echo $this->Html->link(__('Voir'), 
+					array(
+						'controller' => 'transports', 
+						'action' => 'view', 
+						$old_etape,
+						0,
+						'?voyage_id='.$voyage_id.'&days='.$days.'&date_debut='.$date_debut
+					)); 
+			?>
 		</div>
 	</div>
 </div>
+
+
+<script>
+	$('#etape<?php echo __($etape_selected); ?>').addClass("etape_selected");
+</script>

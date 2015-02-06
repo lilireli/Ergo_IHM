@@ -79,6 +79,7 @@
 									    'bus' => 'bus',
 									    'train' => 'train',
 									    'voiture' => 'voiture',
+									    'tapis volant' => 'tapis volant',
 									    'autre' => 'autre'
 									);
 

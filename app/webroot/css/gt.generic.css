@@ -7,53 +7,70 @@
 @charset "utf-8";
 
 /*
- *	Header and footer
+ * General Style Info
  */
-#header {
-	background-color: #001f9f;
-	/*height: 1.5em;*/
-	color: #ffffff;	
+body {
+	background: #003d4c;
+	color: #fff;
+	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
+	font-size:90%;
+	margin: 0;
+}
+
+#container {
+	text-align: left;
+}
+
+#content{
+	background: #fff;
+	clear: both;
+	color: #333;
+	padding: 10px 20px 40px 20px;
+	overflow: auto;
+}
+
+/*
+ * Titles
+ */
+h1, h2, h3, h4 {
 	font-weight: normal;
+	margin-bottom:0.5em;
+	font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
 }
 
-#footer {
-	background-color: #001f9f;
-	color: #ffffff;
-	height: 20px;
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-}
-
-#header #links{
-	display: inline;
-	position: relative;
+h1 {
+	color: #E8730C;
 	font-size: 2em;
 }
 
-#header #userConnection{
-	display: inline;
-	position:relative;
-	font-size: 1em;
+h2 {
+	color: #6d6e72;
+	font-size: 190%;
+	margin: 0;
+	padding: 0;
 }
+
+h3 {
+	color: #2c6877;
+	font-size: 165%;
+}
+
+h4 {
+	color: #E8730C;
+	font-size: 200%;
+	margin: 0;
+	padding: 0;
+}
+
+big {
+	font-size: 1.2em;
+}
+
 
 /*
  * Containers
  *
  */
-
-
-
-/* general div */
-div.form,
-div.index,
-div.view {
-	float:right;
-	width:100%;
-	border-left:0px solid #666;
-	padding:0px 0%;
-}
-
 /* do not show the div */
 div.hidden {
 	display: none;
@@ -61,7 +78,8 @@ div.hidden {
 
 /* div pour la connexion et inscription */
 div.login {
-	display: inline;
+	display: inline-block;
+	float:left;
 	width: 35%;
 	padding-top: 2%;
 	padding-left: 7%;
@@ -81,55 +99,48 @@ div.right {
 	float: right;
 }
 
+div.top_right {
+	position: absolute;
+	top: 80px;
+	width: auto;
+	right:5px;
+}
+
+div.actions {
+	padding: 40px;
+}
+
+div#top_left_etape {
+	position: absolute;
+	right: 10px;
+	top:90px;
+	padding:0;
+}
+
 /*
  * Links
  */
 a {
-	color: #ffffff;
 	text-decoration: none;
-	font-weight: normal;
+	font-weight: bold;
 }
 
-/*
- * Titles
- */
-h1 {
-	font-size: 2em;
-	color: blue;
-}
-
-h2 {
-	font-size: 1.5em;
-	color: blue;
-}
-
-big {
-	font-size: 1.2em;
-}
-
-/*
- * Forms
- */
-fieldset legend {
-	color: black;
-	font-size: 100%;
-	font-weight: normal;
-}
-
-form .submit input[type=submit] {
-	background:#001f9f;
-	border-color: #2d6324;
-	color: #fff;
-	padding: 8px 10px;
-}
-form .submit input[type=submit]:hover {
-	background: blue;
+a:hover {
+	text-decoration:none;
 }
 
 /*
  * Buttons
  */
-input[type=submit],
+ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+ul, li {
+	margin: 15px 12px;
+}
+
 .actions ul li a,
 .actions a {
 	font-weight:normal;
@@ -143,156 +154,4 @@ input[type=submit]:active,
 .actions ul li a:active,
 .actions a:active {
 	background: blue;
-}
-
-/*
- * Onglets
- */
-#onglets
-{
-    list-style-type : none;
-    padding-bottom : 24px; /* à modifier suivant la taille de la police ET de la hauteur de l'onglet dans #onglets li */
-    border-bottom : 1px solid #6d6e72;
-    margin-left : 0;
-}
-
-#onglets li
-{
-    float : left;
-    height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
-    background-color: #6d6e72;
-    margin : 2px 2px 0 2px !important;  /* Pour les navigateurs autre que IE */
-    margin : 1px 2px 0 2px;  /* Pour IE  */
-    border : 1px solid #6d6e72;
-}
-
-#onglets li.active
-{
-    border-bottom: 1px solid #6d6e72;
-    background-color: blue;
-}
-
-div.general_voyage {
-	padding-bottom: 200px;
-}
-
-/*
- * Liste des voyages 
- */
-
-/* div pour les voyages */
-div.list_voyages {
-	background-color: #4D62BC;
-	border: 1px solid #001f9f;
-	color: black;
-	margin: 2%;
-	margin-left: 7%;
-	width: 85%;
-	padding: 1%;
-}
-
-div.view_voyages {
-	float:left;
-	width: 50%;
-}
-
-div.form_voyages {
-	background-color: #808FCF;
-}
-
-div.form_fieldset_voyages {
-	padding:0;
-	margin:0;
-}
-
-h4.voyages {
-	font-size: 2em;
-	color: #E8730C;
-}
-
-/* apparait lorsque l'on ajoute un participant (suite autocompletion) */
-div.field_participants{
-	display: inline-block;
-	background-color: #CCCCCC;
-	border: 1px solid #000000;
-	height: 2em;
-	color: black;
-	margin: 2%;
-	padding: 0;
-}
-
-/*
- * Gestion de la frise
- */
-div.frise{
-	position:absolute;
-	text-align: center;
-}
-
-div.frise_background {
-	position:fixed;
-	bottom:20px;
-	background-color: #8291D0;
-	width: 100%;
-	height: 100px;
-	margin: 0;
-	padding: 0;
-	left:0;
-	margin-bottom: 8px;
-	border-top: 4px solid #000000;
-}
-
-div.frise_general {
-	position:fixed;
-	bottom:20px;
-	width: 100%;
-	height: 100px;
-	margin-bottom: 8px;
-}
-
-/* div pour les étapes */
-div.list_days {
-	display: inline-block;
-	height: 100px;
-	color: 	#4C4C4C;
-	border-left: 2px dashed #4C4C4C;
-	z-index: 1;
-}
-
-div.list_etapes {
-	display: inline-block;
-	background-color: #ED8F3D;
-	border: 1px solid #001f9f;
-	height: 50px;
-	color: black;
-	margin-top: 40px;
-	z-index: 3;
-}
-
-div.list_transport {
-	display: inline-block;
-	background-color: #E8730C;
-	border: 1px solid #001f9f;
-	height: 40px;
-	color: black;
-	margin-top: 45px;
-	z-index: 2;
-}
-
-div.phantom_etape {
-	background-color: #DDDDDD;
-	z-index: 3;
-}
-
-div.frise_move_right {
-	position:fixed;
-	right: 0;
-	font-size: 2em;
-	z-index: 4;
-}
-
-div.frise_move_left {
-	position:fixed;
-	font-size: 2em;
-	z-index: 4;
 }
