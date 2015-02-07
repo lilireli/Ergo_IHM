@@ -44,11 +44,12 @@
     		<li class="active">
     			<?php 
     				echo __($this->Html->link(__('Transports'), 
-			            array(
-			                'controller' => 'transport', 
-			                'action' => 'view', 
-			                $etape_debut.'/'.$etape_fin.$base_url
-			            ))); 
+                        array(
+                            'controller' => 'transports', 
+                            'action' => 'view', 
+                            $etape_debut,
+                            $etape_fin.$base_url
+                        ))); 
 			    ?>
     		</li>
     	</ul>
@@ -363,7 +364,10 @@
 
 <?php
 	echo $this->element('frise', array(
-        'voyage_id' => $voyage_id,
-        'transport_selected' => $transport_id 
+        'voyage_id' => $voyage_id
     ));
 ?>
+
+<script>
+	$('#transport<?php echo __($etape_debut); ?>').addClass("transport_selected");
+</script>

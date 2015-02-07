@@ -39,9 +39,10 @@
                 <?php 
                     echo __($this->Html->link(__('Transports'), 
                         array(
-                            'controller' => 'transport', 
+                            'controller' => 'transports', 
                             'action' => 'view', 
-                            $etape_debut.'/'.$etape_fin.$base_url
+                            $etape_debut,
+                            $etape_fin.$base_url
                         ))); 
                 ?>
             </li>
@@ -131,3 +132,7 @@
         'etape_selected' => $etape_id
     ));
 ?>
+
+<script>
+    $('#transport<?php echo __($etape_debut); ?>').addClass("transport_selected");
+</script>

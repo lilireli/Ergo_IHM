@@ -62,6 +62,9 @@
 	    case 'delete':
 	    	echo $this->Html->image('delete.png', array('height'=>'25px'));
 	    	break;
+	    case 'loupe':
+	    	echo $this->Html->image('loupe.png', array('height'=>'25px'));
+	    	break;
 	}
 ?>
 

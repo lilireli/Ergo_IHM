@@ -47,6 +47,10 @@ class User extends AppModel {
 				'rule' => array('notEmpty'),
 				'message' => 'Un nom d\'utilisateur est requis.'
 			),
+            'between' => array( // l'username doit avoir plus de 2 caractères
+                'rule'    => array('lengthBetween', 3, 20),
+                'message' => 'Le nom d\'utilisateur doit comprendre entre 3 et 20 caractères.'
+            )
 		),
         'mail' => array(
         	'notEmpty' => array(

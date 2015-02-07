@@ -30,7 +30,7 @@
     </div>
 
     <?php
-        echo $this->element('menu_etape', array('base_url' => $etape_id.$base_url, 'tab' => 1));
+        echo $this->element('menu_etape', array('base_url' => $etape_id.$base_url, 'tab' => 2));
     ?>
 
     <div class="form">
@@ -120,7 +120,10 @@
 
 <?php
     echo $this->element('frise', array(
-        'voyage_id' => $voyage_id,
-        'etape_selected' => $etape_id
+        'voyage_id' => $voyage_id
     ));
 ?>
+
+<script>
+    $('#etape<?php echo __($etape_id); ?>').addClass("etape_selected");
+</script>

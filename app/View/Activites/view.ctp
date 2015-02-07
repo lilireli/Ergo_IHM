@@ -333,7 +333,10 @@
 
 <?php
     echo $this->element('frise', array(
-        'voyage_id' => $voyage_id,
-        'etape_selected' => $etape_id
+        'voyage_id' => $voyage_id
     ));
 ?>
+
+<script>
+	$('#etape<?php echo __($etape_id); ?>').addClass("etape_selected");
+</script>
