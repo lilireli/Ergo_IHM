@@ -3,7 +3,6 @@
 
 <?php echo $this->Form->create('User'); ?>
 	<fieldset>
-		<legend><?php echo __('Mot de passe'); ?></legend>
 	<?php
 		echo $this->Form->input('user_id', array(
 			'type' => 'hidden'));

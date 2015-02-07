@@ -17,7 +17,7 @@
 					<?php echo h(ucfirst(strtolower($participant['User2']['user_name']))); ?>&nbsp;
 
 					<div class="float right">
-						<?php echo $this->Html->link(__('Supprimer'), array('controller' => 'voyages', 'action' => 'delete_participant', $voyage_id, $participant['User2']['user_id']));?>
+						<?php echo $this->Html->link(__('X'), array('controller' => 'voyages', 'action' => 'delete_participant', $voyage_id, $participant['User2']['user_id']));?>
 					</div>
 				</td>
 			</tr>

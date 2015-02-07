@@ -1,3 +1,5 @@
+<?php $this->element('date_to_string'); // afficher dates français ?>
+
 <?php 
 	$voyage_id = $voyage['Voyage']['voyage_id']; 
 	$seconds = strtotime($voyage['Voyage']['date_fin']) - strtotime($voyage['Voyage']['date_debut']);
@@ -10,9 +12,9 @@
 
 		<dl>
 			<dt><?php echo __('Du '); ?></dt>
-			<dd><?php echo h($voyage['Voyage']['date_debut']); ?></dd>
+			<dd><?php echo h(aff_date($voyage['Voyage']['date_debut'])); ?></dd>
 			<dt><?php echo __(' Au '); ?></dt>
-			<dd><?php echo h($voyage['Voyage']['date_fin']); ?></dd>
+			<dd><?php echo h(aff_date($voyage['Voyage']['date_fin'])); ?></dd>
 			<dt><?php echo __('Destination'); ?></dt>
 			<dd><?php echo h(ucfirst(strtolower($voyage['Voyage']['lieu']))); ?></dd>
 		</dl>
@@ -26,10 +28,8 @@
 						array(
 							'controller' => 'etapes',
 							'action' => 'add', 
-							$voyage['Voyage']['voyage_id'].
-								'?voyage_id='.$voyage_id.
-								'&days='.$days.
-								'&date_debut='.$voyage['Voyage']['date_debut'])); 
+							$voyage['Voyage']['voyage_id'].'?voyage_id='.$voyage_id
+						)); 
 				?></li>
 				<li><?php echo $this->Html->link(__('Retour à mes voyages'), array('action' => 'index')); ?> </li>
 			</ul>
@@ -43,11 +43,7 @@
 
 
 <?php 
-	echo $this->element('frise', array(
-		'voyage_id' => $voyage_id,
-		'days' => $days,
-		'date_debut' => $voyage['Voyage']['date_debut']
-	)); 
+	echo $this->element('frise', array('voyage_id' => $voyage_id)); 
 ?>
 
 

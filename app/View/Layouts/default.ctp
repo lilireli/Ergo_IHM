@@ -28,8 +28,12 @@ $GTVersion = __d('gt_dev', '1.0')
 		echo $this->Html->css('voyages');
 		echo $this->Html->css('gt.generic');
 		echo $this->Html->css('autocomplete');
-		// les paramètres de style de GroupTrotteur viennent écraser
-		// Les réglages embétants de CakePHP mais certains sont conservés
+		echo $this->Html->css('../js/jscalendar/calendar-white');
+
+		echo $this->Html->script('jscalendar/calendar.js');
+		echo $this->Html->script('jscalendar/lang/calendar-fr.js');
+		echo $this->Html->script('custom_calendar.js');
+
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

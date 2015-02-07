@@ -11,6 +11,14 @@
 			$etapes = $this->requestAction(
 				array('controller'=>'etapes', 'action'=>'view', $voyage_id));
 
+			if ($etapes != null) {
+
+			$voyage_id = $etapes[0]['Voyage']['voyage_id']; 
+			$seconds = strtotime($etapes[0]['Voyage']['date_fin']) - strtotime($etapes[0]['Voyage']['date_debut']);
+			$days = floor($seconds/(3600*24));
+
+			$date_debut = $etapes[0]['Voyage']['date_debut'];
+
 			$width_etape = 70;
 			$width_transport = 40;
 			$width_day = 110;
@@ -40,6 +48,7 @@
 		<?php 
 			$transport_debut = strtotime($date_debut) + 3600*24; 
 			$old_etape = 0;
+			$etape_name_old = 'Maison';
 		?>
 			
 		<?php foreach ($etapes as $etape): ?>
@@ -72,8 +81,9 @@
 							'controller' => 'transports', 
 							'action' => 'view', 
 							$old_etape,
-							$etape['Etape']['etape_id'],
-							'?voyage_id='.$voyage_id.'&days='.$days.'&date_debut='.$date_debut
+							$etape['Etape']['etape_id'].
+							'?voyage_id='.$voyage_id.
+							'&etape_name='.$etape_name_old.' à '.ucfirst(strtolower($etape['Etape']['etape_name']))
 						)); 
 				?>
 			</div>
@@ -87,7 +97,7 @@
 					array(
 						'controller' => 'etapes', 
 						'action' => 'index', 
-						$etape['Etape']['etape_id'].'?voyage_id='.$voyage_id.'&days='.$days.'&date_debut='.$date_debut.'&etape_name='.$etape['Etape']['etape_name']
+						$etape['Etape']['etape_id'].'?voyage_id='.$voyage_id.'&etape_name='.$etape['Etape']['etape_name']
 					)); 
 				?>
 			</div>
@@ -95,6 +105,7 @@
 			<?php 
 				$transport_debut = strtotime($etape['Etape']['date_fin']); 
 				$old_etape = $etape['Etape']['etape_id'];
+				$etape_name_old = ucfirst(strtolower($etape['Etape']['etape_name'])); 
 			?>
 		<?php endforeach; ?>
 
@@ -119,10 +130,12 @@
 						'action' => 'view', 
 						$old_etape,
 						0,
-						'?voyage_id='.$voyage_id.'&days='.$days.'&date_debut='.$date_debut
+						'?voyage_id='.$voyage_id.
+						'&etape_name='.$etape_name_old.' à Maison'
 					)); 
 			?>
 		</div>
+		<?php } ?>
 	</div>
 </div>
 

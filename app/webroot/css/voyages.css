@@ -112,8 +112,13 @@ div.list_transport {
 	z-index: 2;
 }
 
+div.transport_selected {
+	background-color: #E8730C;
+}
+
 div.phantom_etape {
 	background-color: #666666;
+	border: 0px;
 	z-index: 3;
 }
 
@@ -171,32 +176,19 @@ td.accepte {
 	background-color: #ED8F3D;
 }
 
-div.input_like {
-	display: inline;
-	font-size: 110%;
-	width: auto;
-	background-color: #D1680B;
-	color: #ffffff;
-	padding: 1px;
-	border: 2px outset #DDDDDD;
-	margin: 0;
-}
-
-.input_like a {
-	color: #ffffff;
-	font-weight: normal;
-	clear: both;
+div.top {
+	vertical-align: top;
 }
 
 .hat fieldset {
 	padding: 0;
 	margin: 0;
-	position: inline_block;
+	display: inline-block;
 	height: 0px;
 }
 
 .hat form div.submit{
-	position: inline_block;
+	position: inline-block;
 	margin: 0;
 	padding: 0;
 }
@@ -204,4 +196,55 @@ div.input_like {
 .buttons_hat {
 	margin: 0;
 	padding: 0;
+}
+
+div.button_keeper {
+	position: relative;
+	vertical-align: top;
+	width: 40px;
+}
+
+div.behind {
+	position: absolute;
+	display: inline-block;
+	left:0;
+	top:0;
+}
+
+div.front {
+	position: absolute;
+	display: inline-block;
+	left:0;
+	top:0;
+}
+
+.front input[type=submit],
+.front a{
+	opacity: 0.0;
+	border: 0;
+	z-index:3;
+}
+
+.border_right{
+	border-right: 1px solid #6d6e72;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 60px;
+}
+
+div.picto {
+	position: inline;
+	float: left;
+	height: 30px;
+	width: 50px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+.front input[type=submit] {
+	position: relative;
+	top:-50px;
+	left:-10px;
+	width: 50px;
 }

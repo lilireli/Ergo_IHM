@@ -40,7 +40,11 @@ class VoyagesController extends AppController {
 	 			'foreignKey' => false,
 	 			'conditions' => array(
 	 				'UserVoyage.voyage_id = Voyage.voyage_id',
-	 				'UserVoyage.user_id = '.$id)
+	 				'UserVoyage.user_id = '.$id
+	 			),
+	 			'order' => array(
+					'Voyage.date_debut DESC',
+				)
 	 		)));
 
 	 	$this->set('voyages', $this->Voyage->find('all', $options));

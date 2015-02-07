@@ -43,21 +43,33 @@ class Hebergement extends AppModel {
 				'message' => 'Un nom d\'hébergement est requis.'
 			),
 		),
+        'date_debut' => array(
+            'compare' => array(
+                'rule'       => array('after_today'),
+                'message'    => 'La date de début ne doit pas être passée.',
+                'allowEmpty' => false
+            )
+        ),
         'date_fin' => array(
             'compare' => array(
-                'rule'	     => array('validate_date'),
+                'rule'       => array('validate_date'),
                 'message'    => 'La date de fin doit être après la date de début.',
-                'allowEmpty' => true
+                'allowEmpty' => false
             )
         ),
         'prix' => array(
-        	'compare' => array(
-                'rule'	     => array('valid_price'),
+            'compare' => array(
+                'rule'       => array('valid_price'),
                 'message'    => 'Le prix ne peut être négatif.',
                 'allowEmpty' => true
             )
         )
-	);
+    );
+
+    public function after_today() {
+        $today = date('Y-m-d H:i:s');
+        return $this->data[$this->alias]['date_debut'] > $today;
+    }
 
 	public function validate_date() {
     	return $this->data[$this->alias]['date_fin'] > $this->data[$this->alias]['date_debut'];

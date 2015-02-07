@@ -17,21 +17,22 @@ class EtapesController extends AppController {
 			if ($this->Etape->save($this->request->data)) {
 				$this->Session->setFlash(__("L'étape a été sauvée."));
 				$this->redirect(array(
-					'action' => 'index', 
-                	$this->request->data['Etape']['etape_id'].
-                		$this->request->data['Etape']['url'].
-                		'&etape_name='.$this->request->data['Etape']['etape_name']
+					'controller' => 'voyages',
+					'action' => 'view', 
+                	$this->request->data['Etape']['voyage_id']
                 ));
 			}
 		}
 	}
 
 	public function edit($id = null) {
+		$id = strtok(basename($id), '?');
 		$id = strtok(basename($id), '%3F');
 		
 		if (!$this->Etape->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
+			throw new NotFoundException(__('Invalid etape'));
 		}
+
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Etape->save($this->request->data)) {
 				$this->Session->setFlash(__('Vos modifications ont été sauvées'));
@@ -41,6 +42,10 @@ class EtapesController extends AppController {
                 		'&etape_name='.$this->request->data['Etape']['etape_name']
                 ));
 			}
+		}
+		else {
+			$options = array('conditions' => array('Etape.' . $this->Etape->primaryKey => $id));
+			$this->request->data = $this->Etape->find('first', $options);
 		}
 	}
 

@@ -1,20 +1,15 @@
+<?php $this->element('date_to_string'); // afficher dates français ?>
+
 <div class="general_voyage">
 	<?php 
 		$etape_id = strtok(basename($this->here), '%3F'); 
 		$etape_name = $_GET['etape_name'];
 	    $voyage_id = $_GET['voyage_id'];
-	    $days = $_GET['days'];
-	    $date_debut = $_GET['date_debut'];
 
-	    $base_url = $etape_id.
-            '?voyage_id='.$voyage_id.
-            '&days='.$days.
-            '&date_debut='.$date_debut.
+	    $base_url = '?voyage_id='.$voyage_id.
             '&etape_name='.$etape_name;
 
 	    $user_id = $this->session->read('Auth.User.user_id');
-
-	    $this->element('date_to_string');
 
 	    $accepte = false;
 	    $i = 0;
@@ -43,7 +38,7 @@
 	
 
 	<?php    
-	    echo $this->element('menu_etape', array('base_url' => $base_url, 'tab' => 1));
+	    echo $this->element('menu_etape', array('base_url' => $etape_id.$base_url, 'tab' => 1));
 	?>
 
 	<div class="general_voyage">
@@ -66,52 +61,123 @@
 						<td>
 					<?php } ?>
 
-						<!-- Afficher les données générales -->
-						<div class="float">
-							<b><?php echo h($hebergement['Hebergement']['hebergement_name']); ?></b>&nbsp;
-							<?php echo h($hebergement['Hebergement']['type']); ?>&nbsp;
-							<?php echo h(aff_date($hebergement['Hebergement']['date_debut'])); ?>&nbsp;
-							<?php echo h($hebergement['Hebergement']['date_fin']); ?>&nbsp;
-							<?php echo h($hebergement['Hebergement']['createur_id']); ?>&nbsp;
-							<?php echo h($hebergement['Hebergement']['lieu']); ?>&nbsp;
-							<?php echo h($hebergement['Hebergement']['prix']); ?>&nbsp;
-							<?php echo h($hebergement[0]['count_hebergement']); ?>&nbsp;
+						
+						<div class="float border_right" style="width:60%">
+							<!-- Afficher les données générales -->
+							<div class="float top" style="width:40%">
+								<?php echo $this->element('pictograms', array('name' => $hebergement['Hebergement']['type'])); ?>&nbsp;
+								<big><b><?php echo h(ucfirst(strtolower($hebergement['Hebergement']['hebergement_name']))); ?></b></big>&nbsp;
+							</div>
+
+							<div class="float">
+								<?php echo __("Dates : du "); ?>
+								<?php echo h(aff_date($hebergement['Hebergement']['date_debut'])); ?>
+								<?php echo __(" au "); ?>
+								<?php echo h(aff_date($hebergement['Hebergement']['date_fin'])); ?>
+								<br>
+								<?php echo __("Lieu : "); ?>&nbsp;&nbsp;
+								<?php echo h($hebergement['Hebergement']['lieu']); ?>
+								<br>
+								<?php echo __("Prix : "); ?>&nbsp;&nbsp;
+								<?php
+									if($hebergement['Hebergement']['prix'] != 0){
+										echo h($hebergement['Hebergement']['prix']); 
+									} else { echo __('-'); }
+									echo __('€');
+								?>
+							</div>			
+							
+							<!-- Edition -->
+							<div class="float button_keeper right">
+									<div class="behind">
+									<?php echo $this->element('pictograms', array('name' => 'edition')) ?>
+									</div>
+
+									<div class="front">
+								<?php echo $this->Html->link(__('Editer'), array('action' => 'edit', $hebergement['Hebergement']['hebergement_id'].$base_url.'&etape_id='.$etape_id)); ?>
+									</div>
+							</div>
+
 						</div>
 
-						<div class="float right buttons_hat hat">
-						<!-- Vote -->
-						<?php if ($hebergement[0]['count_user'] < 1) { ?>
+						<div class="float border_right top" style="width:10%">
 							<div class="float">
-								<?php echo $this->Form->create('Vote', array('action' => 'add')); ?>
-			    				<fieldset>
-				        			<?php 
-							        	echo $this->Form->input('type_name',
-							        		array('type' => 'hidden', 'default' => 'hebergement'));
-							        	echo $this->Form->input('type_id',
-							        		array('type' => 'hidden', 'default' => $hebergement['Hebergement']['hebergement_id']));
-							        	echo $this->Form->input('user_id',
-							        		array('type' => 'hidden', 'default' => $user_id));
-							        	echo $this->Form->input('etape_id',
-							        		array('type' => 'hidden', 'default' => $etape_id));
-							    	?>
-							    </fieldset>
-								<?php echo $this->Form->end(__('Voter pour')); ?>
+								<big>
+									<br>
+									<?php 
+										$votes = $hebergement[0]['count_hebergement'];
+										echo h($votes);
+										if($votes<2) echo __(' Vote'); 
+										else echo __(' Votes');
+									?>
+								</big>
 							</div>
-						<?php } else { ?>
-							<div class='input_like float'>
-							<?php echo $this->Form->postLink(__('Enlever vote'), array('action' => 'delete', 'vote')); ?>
-							</div>
-						<?php } ?>
+						
+							<!-- Vote -->
+							<?php if ($hebergement[0]['count_user'] < 1) { ?>
+								<div class="float button_keeper">
+									<div class="behind">
+										<?php echo $this->element('pictograms', array('name' => 'unvote')) ?>
+									</div>
+
+									<div class="front">
+										<?php echo $this->Form->create('Vote', array('action' => 'add')); ?>
+					    				<fieldset>
+						        			<?php 
+									        	echo $this->Form->input('type_name',
+									        		array('type' => 'hidden', 'default' => 'hebergement'));
+									        	echo $this->Form->input('type_id',
+									        		array('type' => 'hidden', 'default' => $hebergement['Hebergement']['hebergement_id']));
+									        	echo $this->Form->input('user_id',
+									        		array('type' => 'hidden', 'default' => $user_id));
+									        	echo $this->Form->input('etape_id',
+									        		array('type' => 'hidden', 'default' => $etape_id));
+									        	echo $this->Form->input('url',
+									        		array('type'=>'hidden', 'default'=> $this->here));
+									    	?>
+									    </fieldset>
+										<?php echo $this->Form->end(__('Voter pour')); ?>
+									</div>
+								</div>
+							<?php } else { ?>
+								<div class="float button_keeper">
+									<div class="behind">
+										<?php echo $this->element('pictograms', array('name' => 'vote')) ?>
+									</div>
+
+									<div class="front">
+										<?php 
+											$del_url = str_replace('/', '_1_', $this->here);
+											$del_url = str_replace('?', '_2_', $del_url);
+											$del_url = str_replace('=', '_3_', $del_url);
+											$del_url = str_replace('&', '_4_', $del_url);
+
+											echo $this->Form->postLink(__('Enlever vote'), 
+												array(
+													'controller' => 'votes',
+													'action' => 'delete', 
+													$user_id,
+													'hebergement',
+													$hebergement['Hebergement']['hebergement_id'],
+													$del_url
+												)); 
+										?>
+									</div>
+								</div>
+							<?php } ?>
+						</div>
 						
 
-						<!-- Edition -->
-						<div class='input_like float'>
-							<?php echo $this->Html->link(__('Editer'), array('action' => 'edit', $hebergement['Hebergement']['hebergement_id'])); ?>
-						</div>
+						
 
 						<!-- Validation -->
-						<div class="float">
+						<div class="float button_keeper">
 							<?php if(!$accepte) { ?>
+								<div class="behind">
+								<?php echo $this->element('pictograms', array('name' => 'check')) ?>
+								</div>
+
+								<div class="front">
 								<?php echo $this->Form->create('Hebergement', array('action' => 'edit/'.$hebergement['Hebergement']['hebergement_id'])); ?>
 			    				<fieldset>
 				        			<?php 
@@ -120,11 +186,18 @@
 							        	echo $this->Form->input('hebergement_id',
 							        		array('type' => 'hidden', 'default' => $hebergement['Hebergement']['hebergement_id']));
 							        	echo $this->Form->input('url', 
-							        		array('type' => 'hidden', 'default' => $base_url));
+							        		array('type' => 'hidden', 'default' => $etape_id.$base_url));
 							    	?>
 							    </fieldset>
 								<?php echo $this->Form->end(__('Valider')); ?>
+								</div>
+
 							<?php } else if ($i==0) { ?>
+								<div class="behind">
+								<?php echo $this->element('pictograms', array('name' => 'uncheck')) ?>
+								</div>
+
+								<div class="front">
 								<?php echo $this->Form->create('Hebergement', array('action' => 'edit/'.$hebergement['Hebergement']['hebergement_id'])); ?>
 			    				<fieldset>
 				        			<?php 
@@ -133,16 +206,32 @@
 							        	echo $this->Form->input('hebergement_id',
 							        		array('type' => 'hidden', 'default' => $hebergement['Hebergement']['hebergement_id']));
 							        	echo $this->Form->input('url', 
-							        		array('type' => 'hidden', 'default' => $base_url));
+							        		array('type' => 'hidden', 'default' => $etape_id.$base_url));
 							    	?>
 							    </fieldset>
 								<?php echo $this->Form->end(__('Dévalider')); ?>
+								</div>
 								<?php } ?>
 							</div>
 
 							<!-- suppression -->
-							<div class='input_like float'>
-								<?php echo $this->Form->postLink(__('Supprimer l\'hebergement'), array('action' => 'delete', $hebergement['Hebergement']['hebergement_id']), array(), __('Etes-vous sûr de vouloir supprimer l\'hébergement ?')); ?>
+							<div class='input_like float button_keeper right'>
+								<div class="behind">
+								<?php echo $this->element('pictograms', array('name' => 'delete')) ?>
+								</div>
+
+								<div class="front">
+								<?php echo $this->Form->postLink(__('Supprimer l\'hebergement'), 
+									array(
+										'action' => 'delete', 
+										$hebergement['Hebergement']['hebergement_id'],
+										$etape_id,
+										$voyage_id,
+										$etape_name
+									),
+									array(),
+									__('Etes-vous sûr de vouloir supprimer l\'hébergement ?')); ?>
+								</div>
 							</div>
 
 								<?php $i += 1; ?>
@@ -168,15 +257,26 @@
 					        </div>
 
 					        <div class="add">
-					        	<?php echo $this->Form->create('Hebergement', array('action' => 'add')); ?>
+					        	<?php echo $this->Form->create('Hebergement', array('action' => 'add/'.$base_url.'&etape_id='.$etape_id)); ?>
 							    <fieldset>
 							        <?php 
 							        	$options = array(
-										    'hôtel'=>'hôtel', 
-										    'auberge de jeunesse'=>'auberge de jeunesse', 
-										    'location'=>'location', 
-										    'camping'=>'camping', 
-										    'autre'=>'autre'
+										    'hôtel'=> 
+										    	'<div class="float">'.
+										    		$this->element('pictograms', array('name' => 'hôtel')).
+										    	'hôtel</div>', 
+										    'chambre d\'hôte'=>
+										    	'<div class="float">'.
+										    		$this->element('pictograms', array('name' => 'chambre d\'hôte')).
+										    	'chambre d\'hôte</div>', 
+										    'camping'=>
+										    	'<div class="float">'.
+										    		$this->element('pictograms', array('name' => 'camping')).
+										    	'camping</div>', 
+										    'autre'=>
+										    	'<div class="float">'.
+										    		$this->element('pictograms', array('name' => 'autre')).
+										    	'autre</div>'
 										);
 
 										$attributes = array(
@@ -189,26 +289,17 @@
 							        	echo $this->Form->input('hebergement_name', array('label'=>'Nom'));
 							        ?>
 							        	
-						        	<div class='float'>
-										<?php 
-											echo $this->Form->input('date_debut', array(
-												'label'=>'Du',
-												'dateFormat' => 'DMY',
-							    				'minYear' => date('Y'),
-							    				'maxYear' => date('Y') + 10,
-						    				)); 
-						    			?>
-									</div>
-									<div class='float'>
-										<?php 
-											echo $this->Form->input('date_fin', array(
-												'label'=>'Au',
-												'dateFormat' => 'DMY',
-							    				'minYear' => date('Y'),
-							    				'maxYear' => date('Y') + 10,
-						    				)); 
-						    			?>
-									</div>
+						        	<div>
+						                <div class='float'>
+						                    <h5>Du</h5>
+						                    <?php echo $this->datePicker->flat('Hebergement][date_debut');?>
+						                </div>
+						                <div class='float'>
+						                    <h5>Au</h5>
+						                    <?php echo $this->datePicker->flat('Hebergement][date_fin');?>
+						                </div>
+						                <p><i><?php echo __('(Les dates doivent être supérieures à aujourd\'hui, avec la date de fin postérieure à la date de début.)'); ?></p></i>
+						            </div>
 							        	
 							        <?php
 							        	echo $this->Form->input('lieu', array('label'=>'Adresse'));
@@ -218,6 +309,8 @@
 							        		array('type' => 'hidden', 'default' => $etape_id));
 							        	echo $this->Form->input('createur_id',
 							        		array('type' => 'hidden', 'default' => $user_id));
+							        	echo $this->Form->input('url',
+                    						array('type'=>'hidden', 'default'=>$etape_id.$base_url));
 							    	?>
 							    </fieldset>
 							<?php echo $this->Form->end(__('Ajouter')); ?>
@@ -233,8 +326,6 @@
 <?php
     echo $this->element('frise', array(
         'voyage_id' => $voyage_id,
-        'days' => $days,
-        'date_debut' => $date_debut,
         'etape_selected' => $etape_id
     ));
 ?>

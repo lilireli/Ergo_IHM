@@ -10,25 +10,16 @@
 			echo $this->Form->input('lieu', array('label'=>'Lieu'));
 		?>
 
-		<div class='float'>
-			<?php 
-				echo $this->Form->input('date_debut', array(
-					'label'=>'Du',
-					'dateFormat' => 'DMY',
-    				'minYear' => date('Y'),
-    				'maxYear' => date('Y') + 10,
-				)); 
-			?>
-		</div>
-		<div class='float'>
-			<?php 
-				echo $this->Form->input('date_fin', array(
-					'label'=>'Au',
-					'dateFormat' => 'DMY',
-    				'minYear' => date('Y'),
-    				'maxYear' => date('Y') + 10,
-				)); 
-			?>
+		<div>
+			<div class='float'>
+				<h5>Du</h5>
+				<?php echo $this->datePicker->flat('Voyage][date_debut');?>
+			</div>
+			<div class='float'>
+				<h5>Au</h5>
+				<?php echo $this->datePicker->flat('Voyage][date_fin');?>
+			</div>
+			<p><i><?php echo __('(Les dates doivent être supérieures à aujourd\'hui, avec la date de fin postérieure à la date de début.)'); ?></p></i>
 		</div>
 
 		<?php

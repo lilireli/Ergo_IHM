@@ -23,7 +23,7 @@
 #header #links{
 	display: inline;
 	position: relative;
-	font-size: 2em;
+	font-size: 1.5em;
 }
 
 #header #userConnection{
@@ -53,7 +53,7 @@
 #links {
 	position: fixed;
 	left: 25%;
-	bottom: -10px;
+	bottom: -0.9em;
 }
 
 .header_onglets {

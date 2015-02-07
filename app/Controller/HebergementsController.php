@@ -5,7 +5,7 @@ App::uses('AppController', 'Controller');
  *
  */
 class HebergementsController extends AppController {
-	public function add($etape_id) {
+	public function add() {
 		if ($this->request->is('post')) {
 			$this->Hebergement->create();
 			
@@ -13,24 +13,35 @@ class HebergementsController extends AppController {
 				// rediriger vers la page de l'étape
 				$this->Session->setFlash(__("L'hébergement a été sauvé."));
 				$this->redirect(array(
-					'controller' => 'etapes', 
-					'action' => 'index', 
-					$this->request->data['Hebergement']['etape_id']
+					'controller' => 'hebergements', 
+					'action' => 'view', 
+					$this->request->data['Hebergement']['url']
 				));
 			}
 		}
 	}
 
 	public function edit($id = null) {
+		$id = strtok(basename($id), '?');
+		$id = strtok(basename($id), '%3F');
+		
 		if (!$this->Hebergement->exists($id)) {
 			throw new NotFoundException(__('Invalid hebergement'));
 		}
+
 		if ($this->request->is(array('post', 'put'))) {
-			debug($this->data); 
 			if ($this->Hebergement->save($this->request->data)) {
 				$this->Session->setFlash(__('Vos modifications ont été sauvées'));
-                $this->redirect(array('controller' => 'hebergements', 'action' => 'view', $this->request->data['Hebergement']['url']));
+                $this->redirect(array(
+                	'controller' => 'hebergements', 
+					'action' => 'view', 
+                	$this->request->data['Hebergement']['url']
+                ));
 			}
+		}
+		else {
+			$options = array('conditions' => array('Hebergement.' . $this->Hebergement->primaryKey => $id));
+			$this->request->data = $this->Hebergement->find('first', $options);
 		}
 	}
 
@@ -79,8 +90,37 @@ class HebergementsController extends AppController {
 	 			'count(Vote.type_id) AS count_hebergement',
 	 			'count(Vote2.type_id) AS count_user'
 			),
-			'order' => array('Hebergement.accepte DESC', 'count_hebergement DESC'),);
+			'order' => array(
+				'Hebergement.accepte DESC', 
+				'count_hebergement DESC'
+			)
+		);
 		
 		$this->set('hebergements', $this->Hebergement->find('all', $options));
+	}
+
+	public function delete($id = null, $etape_id, $voyage_id, $etape_name) {
+		$this->Hebergement->id = $id;
+		if (!$this->Hebergement->exists()) {
+			throw new NotFoundException(__('Invalid hebergement'));
+		}
+
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Hebergement->delete()) {
+			$this->redirect(
+            	array(
+            		'action' => 'view',
+            		$etape_id.'?voyage_id='.$voyage_id.'&etape_name='.$etape_name
+            	)
+            );
+		} else {
+			$this->Session->setFlash(__('Erreur durant la suppression, veuillez réessayer'));
+            $this->redirect(
+            	array(
+            		'action' => 'view',
+            		$etape_id.'?voyage_id='.$voyage_id.'&etape_name='.$etape_name
+            	)
+            );
+		}
 	}
 }

@@ -72,14 +72,14 @@ class Voyage extends AppModel {
         	'compare' => array(
                 'rule'	     => array('after_today'),
                 'message'    => 'La date de début ne doit pas être passée.',
-                'allowEmpty' => true
+                'allowEmpty' => false
             )
         ),
         'date_fin' => array(
             'compare' => array(
                 'rule'	     => array('validate_date'),
                 'message'    => 'La date de fin doit être après la date de début.',
-                'allowEmpty' => true
+                'allowEmpty' => false
             )
         )
 	);

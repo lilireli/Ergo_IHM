@@ -44,6 +44,8 @@ class AppController extends Controller {
         )
     );
 
+    public $helpers = array('DatePicker');
+
     public function beforeFilter() {
         // réduire les pages visibles hors connexion au home
         $this->Auth->allow(array('controller' => 'pages', 'action' => 'display', 'home'));

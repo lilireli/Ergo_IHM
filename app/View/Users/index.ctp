@@ -1,3 +1,5 @@
+<?php $this->element('date_to_string'); // afficher dates français ?>
+
 <div>
 <h1><?php echo __('Mon compte'); ?></h1>
 	<dl>
@@ -13,7 +15,7 @@
 		</dd>
 		<dt><?php echo __('Date de naissance'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['date_of_birth']); ?>
+			<?php echo h(aff_date($user['User']['date_of_birth'])); ?>
 			&nbsp;
 		</dd>
 	</dl>

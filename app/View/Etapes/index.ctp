@@ -1,15 +1,13 @@
+<?php $this->element('date_to_string'); // afficher dates français ?>
+
 <div class="general_voyage">
     <?php 
     	$etape_id = $etape['Etape']['etape_id']; 
         $etape_name = $_GET['etape_name'];
         $voyage_id = $_GET['voyage_id'];
-        $days = $_GET['days'];
-        $date_debut = $_GET['date_debut'];
 
         $base_url = $etape_id.
             '?voyage_id='.$voyage_id.
-            '&days='.$days.
-            '&date_debut='.$date_debut.
             '&etape_name='.$etape_name;
     ?>
 
@@ -50,12 +48,12 @@
             <dl>
                 <dt><?php echo __('Du'); ?></dt>
                 <dd>
-                    <?php echo h($etape['Etape']['date_debut']); ?>
+                    <?php echo h(aff_date($etape['Etape']['date_debut'])); ?>
                     &nbsp;
                 </dd>
                 <dt><?php echo __('Au'); ?></dt>
                 <dd>
-                    <?php echo h($etape['Etape']['date_fin']); ?>
+                    <?php echo h(aff_date($etape['Etape']['date_fin'])); ?>
                     &nbsp;
                 </dd>
             </dl>
@@ -73,8 +71,6 @@
 <?php
     echo $this->element('frise', array(
         'voyage_id' => $voyage_id,
-        'days' => $days,
-        'date_debut' => $date_debut,
         'etape_selected' => $etape_id
     ));
 ?>

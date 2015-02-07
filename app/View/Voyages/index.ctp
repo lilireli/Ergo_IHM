@@ -1,3 +1,5 @@
+<?php $this->element('date_to_string'); // afficher dates français ?>
+
 <h1><?php echo __('Mes Voyages'); ?></h1>
 
 
@@ -13,9 +15,9 @@
 		
 		<p>
 			<?php echo __("Du "); ?>
-			<?php echo h($voyage['Voyage']['date_debut']); ?>
+			<?php echo h(aff_date($voyage['Voyage']['date_debut'])); ?>
 			<?php echo __(" au "); ?>
-			<?php echo h($voyage['Voyage']['date_fin']); ?>
+			<?php echo h(aff_date($voyage['Voyage']['date_fin'])); ?>
 		</p>
 	</div>
 
@@ -58,26 +60,17 @@
 				<?php echo $this->Form->input('lieu', array('label'=>'Lieu')); ?>
 			</div>
 
-			<div class='float form_fieldset_voyages'>
-				<?php 
-					echo $this->Form->input('date_debut', array(
-						'label'=>'Du',
-						'dateFormat' => 'DMY',
-	    				'minYear' => date('Y'),
-	    				'maxYear' => date('Y') + 10,
-    				)); 
-    			?>
-			</div>
-			<div class='float form_fieldset_voyages'>
-				<?php 
-					echo $this->Form->input('date_fin', array(
-						'label'=>'Au',
-						'dateFormat' => 'DMY',
-	    				'minYear' => date('Y'),
-	    				'maxYear' => date('Y') + 10,
-    				)); 
-    			?>
-			</div>
+			<div class="form_fieldset">
+				<div class='float'>
+					<h5>Du</h5>
+					<?php echo $this->datePicker->flat('Voyage][date_debut');?>
+				</div>
+				<div class='float'>
+					<h5>Au</h5>
+					<?php echo $this->datePicker->flat('Voyage][date_fin');?>
+				</div>
+				<p><i><?php echo __('(Les dates doivent être supérieures à aujourd\'hui, avec la date de fin postérieure à la date de début.)'); ?></p></i>
+			</div>								
 
 			<?php
 				echo $this->Form->input('createur_id', 

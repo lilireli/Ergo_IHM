@@ -13,11 +13,35 @@ class ActivitesController extends AppController {
 				// rediriger vers la page de l'étape
 				$this->Session->setFlash(__("L'activité a été sauvée."));
 				$this->redirect(array(
-					'controller' => 'etapes', 
-					'action' => 'index', 
-					$this->request->data['Activite']['etape_id']
+					'controller' => 'activites', 
+					'action' => 'view', 
+					$this->request->data['Activite']['url']
 				));
 			}
+		}
+	}
+
+	public function edit($id = null) {
+		$id = strtok(basename($id), '?');
+		$id = strtok(basename($id), '%3F');
+		
+		if (!$this->Activite->exists($id)) {
+			throw new NotFoundException(__('Invalid activite'));
+		}
+
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->Activite->save($this->request->data)) {
+				$this->Session->setFlash(__('Vos modifications ont été sauvées'));
+                $this->redirect(array(
+                	'controller' => 'activites', 
+					'action' => 'view', 
+                	$this->request->data['Activite']['url']
+                ));
+			}
+		}
+		else {
+			$options = array('conditions' => array('Activite.' . $this->Activite->primaryKey => $id));
+			$this->request->data = $this->Activite->find('first', $options);
 		}
 	}
 
@@ -65,8 +89,38 @@ class ActivitesController extends AppController {
 	 			'Activite.accepte',
 	 			'count(Vote.type_id) AS count_activite',
 	 			'count(Vote2.type_id) AS count_user'
-			));
+			),
+			'order' => array(
+				'Activite.accepte DESC', 
+				'count_activite DESC'
+			)
+		);
 		
 		$this->set('activites', $this->Activite->find('all', $options));
+	}
+
+	public function delete($id = null, $etape_id, $voyage_id, $etape_name) {
+		$this->Activite->id = $id;
+		if (!$this->Activite->exists()) {
+			throw new NotFoundException(__('Invalid activite'));
+		}
+
+		$this->request->allowMethod('post', 'delete');
+		if ($this->Activite->delete()) {
+			$this->redirect(
+            	array(
+            		'action' => 'view',
+            		$etape_id.'?voyage_id='.$voyage_id.'&etape_name='.$etape_name
+            	)
+            );
+		} else {
+			$this->Session->setFlash(__('Erreur durant la suppression, veuillez réessayer'));
+            $this->redirect(
+            	array(
+            		'action' => 'view',
+            		$etape_id.'?voyage_id='.$voyage_id.'&etape_name='.$etape_name
+            	)
+            );
+		}
 	}
 }
