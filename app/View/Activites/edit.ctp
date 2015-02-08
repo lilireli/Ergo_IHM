@@ -13,7 +13,7 @@
     $etape_name = $_GET['etape_name'];
     $etape_id = $_GET['etape_id'];
 
-    $activite_id = strtok(basename($this->here), '%3F');
+    $activite_id = strtok(basename($this->here), '%');
 
     $base_url = '?voyage_id='.$voyage_id.'&etape_name='.$etape_name;
 ?>

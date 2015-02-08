@@ -12,7 +12,7 @@
 
 <div class="general_voyage">
 	<?php 
-		$etape_id = strtok(basename($this->here), '%3F'); 
+		$etape_id = strtok(basename($this->here), '%'); 
 		$etape_name = $_GET['etape_name'];
 	    $voyage_id = $_GET['voyage_id'];
 

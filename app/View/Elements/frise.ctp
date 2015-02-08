@@ -20,24 +20,29 @@
 	<!-- Créer les divers éléments de la frise -->
 	<div class="frise frise_general" id="frise_voyage">
 		<?php 
+			// récupérer les étapes
 			$etapes = $this->requestAction(
 				array('controller'=>'etapes', 'action'=>'view', $voyage_id));
 
-			if ($etapes != null) {
+			if ($etapes != null) { // on peut ne pas avoir d'étapes
 
+			// données du voyage
 			$voyage_id = $etapes[0]['Voyage']['voyage_id']; 
 			$seconds = strtotime($etapes[0]['Voyage']['date_fin']) - strtotime($etapes[0]['Voyage']['date_debut']);
 			$days = floor($seconds/(3600*24));
 
 			$date_debut = $etapes[0]['Voyage']['date_debut'];
 
+			// tailles générales
 			$width_etape = 70;
 			$width_transport = 40;
 			$width_day = 110;
 
+			// emplacement de la fin de la frise
 			$left_end = $days*$width_day + $width_transport/2 + $width_etape/2;
 		?>
 
+		<!-- div hidden pour que jquery puisse avoir accès à certaines données -->
 		<div class="hidden" id="nombre_days">
 			<?php echo __($days); ?>
 		</div>
@@ -46,9 +51,12 @@
 			<?php echo __(strtotime($date_debut)); ?>
 		</div>
 
+		<?php 
+			// créer les jours de la frise, ajouter la possibilité de bouger la frise vers la droite ou la gauche
+			echo $this->Html->script('frise', array('inline'=>true)); 
+		?>
 
-		<?php echo $this->Html->script('frise', array('inline'=>true)); ?>
-
+		<!-- Créer les étapes de début et de fin -->
 		<div class="frise list_etapes phantom_etape" style="left:0px; height:<?php echo __($width_etape/2); ?>px;">
 			<?php echo __("Départ"); ?>
 		</div>
@@ -58,11 +66,11 @@
 		</div>
 
 		<?php 
-			$transport_debut = $width_etape/2; 
-			$old_etape = 0;
+			$transport_debut = $width_etape/2; // début de la div de transport (on la conserve)
+			$old_etape = 0; // étape précédente pour le nom du transport
 			$etape_name_old = 'Maison';
-			$idx = 0;
-			$len_et = sizeof($etapes)
+			$idx = 0; // regarder l'idx de l'étape d'avant pour des questions de placement
+			$len_et = sizeof($etapes); // nombre d'étapes
 		?>
 			
 		<?php foreach ($etapes as $etape): ?>
@@ -99,7 +107,7 @@
 				$left_t = $transport_debut -5;
 				$width_t = $left - $transport_debut +5;
 
-				$transport_debut += $width + $width_transport;
+				$transport_debut = $left + $width;
 
 				$idx += 1;
 			?>
