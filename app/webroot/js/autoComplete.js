@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var voyage_id = voyage.value;
 	
 	$("#participants").autocomplete({
-	    source: "/users/autoComplete/?voyage=82&" + name, // appeler le fichier php qui nous renverra les noms possibles
+	    source: "/users/autoComplete/?voyage="+voyage_id + name, // appeler le fichier php qui nous renverra les noms possibles
 	    minLength: 2, //This is the min ammount of chars before autocomplete kicks in
 	    
 	    // when field is selected keep the user, create the id
