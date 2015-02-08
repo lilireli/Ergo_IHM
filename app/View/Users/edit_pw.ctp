@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Modifier le mot de passe d'un utilisateur
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <div class="users form">
 <h3><?php echo __('Modifier mon mot de passe')?></h3>
 

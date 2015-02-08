@@ -26,7 +26,7 @@ App::uses('Debugger', 'Utility');
 	else {
 		?>
 		<h1>Accueil</h1>
-		<p> Bienvenue sur le site d'organisation de voyages collaboratif </p>
+		<p> Bienvenue sur le site Grouptrotteur </p>
 		<?php
 	}
 ?>

@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Ajouter un voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <div class="voyages">
 	<h3><?php echo __("Créer un nouveau voyage"); ?></h3>
 

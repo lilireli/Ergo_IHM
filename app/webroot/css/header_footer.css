@@ -1,6 +1,11 @@
-/*
- *	Header and footer
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Gestion des headers et des footers
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
  */
+
 #header {
 	background-color: #001f9f;
 	color: #ffffff;	

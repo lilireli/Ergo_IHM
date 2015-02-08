@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Ajouter un transport
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php 
 	$etape_debut = $_GET['etape_debut']; 
 	$etape_fin = $_GET['etape_fin'];
@@ -38,6 +48,8 @@
     	<ul class="onglets ">
     		<li class="active">
     			<?php 
+    				// afficher les onglets
+
     				echo __($this->Html->link(__('Transports'), 
                         array(
                             'controller' => 'transports', 
@@ -134,11 +146,13 @@
 </div>
 
 <?php
+	// afficher la frise
 	echo $this->element('frise', array(
         'voyage_id' => $voyage_id, 
     ));
 ?>
 
 <script>
+	// selectionner le transport
 	$('#transport<?php echo __($etape_debut); ?>').addClass("transport_selected");
 </script>

@@ -1,9 +1,15 @@
 <?php
-App::uses('AppModel', 'Model');
 /**
- * Voyage Model
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
  *
- * @property users_voyages $users_voyages
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ * @package       app.Model.Activite
+ */
+App::uses('AppModel', 'Model');
+
+/**
+ * Activite Model
+ *
  */
 class Activite extends AppModel {
 
@@ -21,6 +27,11 @@ class Activite extends AppModel {
  */
 	public $displayField = 'activite_name';
 
+/**
+ * BelongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
         'Etape' => array(
             'className' => 'Etape',
@@ -32,6 +43,11 @@ class Activite extends AppModel {
         )
     );
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
     public $validate = array(
         'activite_id' => array(
             'numeric' => array(
@@ -67,6 +83,7 @@ class Activite extends AppModel {
         )
     );
 
+    // fonctions de validation
     public function after_today() {
         $today = date('Y-m-d H:i:s');
         return $this->data[$this->alias]['date_debut'] > $today;

@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Editer une activite
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php 
     $voyage_id = $_GET['voyage_id'];
     $etape_name = $_GET['etape_name'];
@@ -30,6 +40,7 @@
     </div>
 
     <?php
+        // afficher les onglets
         echo $this->element('menu_etape', array('base_url' => $etape_id.$base_url, 'tab' => 2));
     ?>
 
@@ -113,11 +124,13 @@
 </div>
 
 <?php
+    // afficher la frise
     echo $this->element('frise', array(
         'voyage_id' => $voyage_id
     ));
 ?>
 
 <script>
+    // selectionner l'étape
     $('#etape<?php echo __($etape_id); ?>').addClass("etape_selected");
 </script>

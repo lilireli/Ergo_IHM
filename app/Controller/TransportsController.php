@@ -1,10 +1,20 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 /**
  * Transport Controller
  *
  */
 class TransportsController extends AppController {
+/**
+ * add method
+ *
+ * @return void
+ */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Transport->create();
@@ -29,7 +39,14 @@ class TransportsController extends AppController {
 		}
 	}
 
+/**
+ * edit method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function edit($id = null) {
+		// enlever les paramètre pour récupérer le bon id
 		$id = strtok(basename($id), '?');
 		$id = strtok(basename($id), '%3F');
 		
@@ -57,10 +74,18 @@ class TransportsController extends AppController {
 		}
 	}
 
+/**
+ * view method
+ *
+ * @param string $etape_debut, string $etape_fin
+ * @return void
+ */
 	public function view($etape_debut, $etape_fin) {
+		// un transport s'identifie dans la frise grâce a son étape de début et de fin
 		$etape_fin = strtok($etape_fin, "?");
 		$user_id= AuthComponent::user('user_id');
 
+		// la première et la dernière étape sont nulles
 		if($etape_debut == 0){ $etape_debut = null;}
 		if($etape_fin == 0){ $etape_fin = null; }
 
@@ -120,10 +145,17 @@ class TransportsController extends AppController {
 		));
 	}
 
+/**
+ * delete method
+ *
+ * @param string $id, string $etape_debut, string $etape_fin, string $voyage_id, string $etape_name
+ * @return void
+ */
 	public function delete($id = null, $etape_debut, $etape_fin, $voyage_id, $etape_name) {
+		// la plupart des paramètres servent à la redirection
 		$this->Transport->id = $id;
 		if (!$this->Transport->exists()) {
-			throw new NotFoundException(__('Invalid activite'));
+			throw new NotFoundException(__('Invalid transport'));
 		}
 
 		$this->request->allowMethod('post', 'delete');

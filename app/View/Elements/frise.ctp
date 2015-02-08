@@ -1,4 +1,15 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Réaliser la frise à partir de l'id du voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <div class="frise frise_background">
+	<!-- Créer les flêches pour naviguer dans le voyage -->
 	<div class="frise_move_right" id="move_right">
 		<?php echo __('>'); ?>
 	</div>
@@ -6,6 +17,7 @@
 		<?php echo __('<'); ?>
 	</div>
 		
+	<!-- Créer les divers éléments de la frise -->
 	<div class="frise frise_general" id="frise_voyage">
 		<?php 
 			$etapes = $this->requestAction(
@@ -162,6 +174,7 @@
 
 				<div class="front">
 					<?php 
+						// aouter le dernier transport
 						echo $this->Html->link(__('Voir'), 
 							array(
 								'controller' => 'transports', 

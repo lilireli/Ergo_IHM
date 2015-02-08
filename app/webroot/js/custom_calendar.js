@@ -1,3 +1,11 @@
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Créer un petit calendrier intéractif (pris de source externe)
+ *
+ * @author      A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+
 var oldLink = null;
 function setActiveStyleSheet(link, title) {
   var i, a, main;

@@ -100,6 +100,7 @@ class User extends AppModel {
         )
 	);
 
+    // fonctions de validation
 	public function validate_passwords() {
     	return $this->data[$this->alias]['new_password'] == $this->data[$this->alias]['re_password'];
 	}	

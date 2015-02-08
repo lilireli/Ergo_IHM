@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Voir la liste des voyages, et en ajouter si nécessaire
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php $this->element('date_to_string'); // afficher dates français ?>
 
 <?php 
@@ -7,6 +17,7 @@
 ?>
 
 <div class="general_voyage">
+	<!-- Données générales du voyage -->
 	<div class="general_voyage view_voyages float">
 		<h1><?php echo h(ucfirst(strtolower($voyage['Voyage']['voyage_name']))); ?></h1>
 
@@ -36,6 +47,7 @@
 		</div>
 	</div>
 
+	<!-- Participants -->
 	<div class="general_voyage view_voyages right">
 		<?php echo $this->element('participant',  array('voyage_id' => $voyage_id)); ?>
 	</div>
@@ -43,6 +55,7 @@
 
 
 <?php 
+	// afficher la frise
 	echo $this->element('frise', array('voyage_id' => $voyage_id)); 
 ?>
 

@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Voir un transport
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php $this->element('date_to_string'); // afficher dates français ?>
 
 <?php 
@@ -13,9 +23,6 @@
     $base_url = '?voyage_id='.$voyage_id.'&etape_name='.$etape_name;;
 
     $user_id = $this->session->read('Auth.User.user_id'); 
-
-    $accepte = false;
-	$i = 0;
 ?>
 
 <div class="general_voyage">
@@ -43,6 +50,7 @@
     	<ul class="onglets ">
     		<li class="active">
     			<?php 
+    				// afficher les onglets
     				echo __($this->Html->link(__('Transports'), 
                         array(
                             'controller' => 'transports', 
@@ -67,7 +75,6 @@
 				<?php 
 					// changer la couleur de la case si le transport est validé
 					if ($transport['Transport']['accepte'] == 1) { 
-						$accepte = true;
 				?>
 					<td class="accepte">
 				<?php } else { ?>
@@ -195,7 +202,7 @@
 
 					<!-- Validation -->
 					<div class="float button_keeper">
-						<?php if(!$accepte) { ?>
+						<?php if($transport['Transport']['accepte'] == 0) { ?>
 							<div class="behind">
 								<?php echo $this->element('pictograms', array('name' => 'check')) ?>
 							</div>
@@ -214,7 +221,7 @@
 							    </fieldset>
 								<?php echo $this->Form->end(__('Valider')); ?>
 							</div>
-						<?php } else if ($i==0) { ?>
+						<?php } else { ?>
 							<div class="behind">
 								<?php echo $this->element('pictograms', array('name' => 'uncheck')) ?>
 							</div>
@@ -256,8 +263,6 @@
 								__('Etes-vous sûr de vouloir supprimer le transport ?')); ?>
 							</div>
 						</div>
-
-						<?php $i += 1; ?>
 					</div>
 				</td>
 			</tr>
@@ -363,11 +368,13 @@
 </div>
 
 <?php
+	// afficher la frise
 	echo $this->element('frise', array(
         'voyage_id' => $voyage_id
     ));
 ?>
 
 <script>
+	// selectionner le transport
 	$('#transport<?php echo __($etape_debut); ?>').addClass("transport_selected");
 </script>

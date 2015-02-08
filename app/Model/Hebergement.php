@@ -1,4 +1,10 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ * @package       app.Model.Hebergement
+ */
 App::uses('AppModel', 'Model');
 /**
  * Hebergement Model
@@ -20,6 +26,11 @@ class Hebergement extends AppModel {
  */
 	public $displayField = 'hebergement_name';
 
+/**
+ * BelongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
         'Etape' => array(
             'className' => 'Etape',
@@ -31,6 +42,11 @@ class Hebergement extends AppModel {
         )
     );
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
     public $validate = array(
 		'hebergement_id' => array(
 			'numeric' => array(
@@ -66,6 +82,7 @@ class Hebergement extends AppModel {
         )
     );
 
+    // fonctions de validation
     public function after_today() {
         $today = date('Y-m-d H:i:s');
         return $this->data[$this->alias]['date_debut'] > $today;

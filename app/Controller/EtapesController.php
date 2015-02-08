@@ -1,15 +1,32 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 /**
  * Etapes Controller
  *
+ * @property Etape $Etape
  */
 class EtapesController extends AppController {
+/**
+ * index method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function index($id) {
 		$options = array('conditions' => array('Etape.' . $this->Etape->primaryKey => $id));
 	 	$this->set('etape', $this->Etape->find('first', $options));
 	}
 
+/**
+ * add method
+ *
+ * @return void
+ */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Etape->create();
@@ -25,7 +42,14 @@ class EtapesController extends AppController {
 		}
 	}
 
+/**
+ * view method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function edit($id = null) {
+		// l'id est une url, on cherche à retrouver le bon id en enlevant les paramètres
 		$id = strtok(basename($id), '?');
 		$id = strtok(basename($id), '%3F');
 		
@@ -49,18 +73,33 @@ class EtapesController extends AppController {
 		}
 	}
 
+/**
+ * view method
+ *
+ * @param string $id
+ * @return array
+ */
 	public function view($id) {
 	// parameter: one voyage id
 
 		$options = array(
 			'conditions' => array(
 				'Etape.voyage_id' => $id
+			),
+			'order' => array(
+				'Etape.date_debut ASC'
 			));
 		
 		return $this->Etape->find('all', $options);
 	}
 
-
+/**
+ * delete method
+ *
+ * @throws NotFoundException
+ * @param string $id, string voyage_id
+ * @return void
+ */
 	public function delete($id, $voyage_id) {
 		$this->Etape->id = $id;
 

@@ -1,4 +1,9 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 App::uses('AuthComponent', 'Controller/Component');
 /**
@@ -172,14 +177,21 @@ class UsersController extends AppController {
 	}
 
 /**
- * beforeFilter
+ * beforeFilter method
+ *
+ * @return void
  */
 	public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('add', 'logout'); 
     }
 
-
+/**
+ * get_users method
+ *
+ * @param string $name, string $id
+ * @return array
+ */
     public function get_users($name, $id) {
     // name correspond au début de l'username de l'utilisateur
     // ne récupérer que les noms qui matches avec name et qui ne sont pas déjà dans le voyage
@@ -195,9 +207,14 @@ class UsersController extends AppController {
 	 	return $this->User->find('all', $options);
 	}
 
-
+/**
+ * autoComplete method
+ *
+ * @return void
+ */
 	public function autoComplete(){
         // On recherche tous les participants qui n'appartiennent pas au voyage $id
+        // On les renvoie en json pour que javascript les interprète
 
        	$this->autoRender=false;
 	    $this->layout = 'ajax';

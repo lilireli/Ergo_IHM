@@ -1,10 +1,20 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 /**
  * Etapes Controller
  *
  */
 class ActivitesController extends AppController {
+/**
+ * add method
+ *
+ * @return void
+ */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Activite->create();
@@ -21,6 +31,12 @@ class ActivitesController extends AppController {
 		}
 	}
 
+/**
+ * edit method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function edit($id = null) {
 		$id = strtok(basename($id), '?');
 		$id = strtok(basename($id), '%3F');
@@ -45,6 +61,12 @@ class ActivitesController extends AppController {
 		}
 	}
 
+/**
+ * view method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function view($id) {
 	// parameter: one etape id
 		$id = strtok($id, "?");
@@ -99,7 +121,14 @@ class ActivitesController extends AppController {
 		$this->set('activites', $this->Activite->find('all', $options));
 	}
 
+/**
+ * delete method
+ *
+ * @param string $id, string $etape_id, string $voyage_id, string $etape_name
+ * @return void
+ */
 	public function delete($id = null, $etape_id, $voyage_id, $etape_name) {
+		// la plupart des paramètres servent à la redirection
 		$this->Activite->id = $id;
 		if (!$this->Activite->exists()) {
 			throw new NotFoundException(__('Invalid activite'));

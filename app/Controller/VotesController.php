@@ -1,11 +1,23 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 /**
- * Etapes Controller
+ * Votes Controller
  *
  */
 class VotesController extends AppController {
+/**
+ * to_url method
+ *
+ * @param string $url_static
+ * @return array
+ */
 	public function to_url($url_static){
+		// retransformer correctement une url
 		$url = str_replace('%3F', '?', $url_static);
 		$url = str_replace('%3D', '=', $url);
 		$url = str_replace('%26', '&', $url);
@@ -32,7 +44,14 @@ class VotesController extends AppController {
 		return $options;
 	}
 
+/**
+ * url_decode method
+ *
+ * @param string $url_static
+ * @return string
+ */
 	public function url_decode($url_static){
+		// afin de pouvoir garder l'url on a transformé les caractères spéciaux ?=/&
 		$url = str_replace('_1_', '/', $url_static);
 		$url = str_replace('_2_', '?', $url);
 		$url = str_replace('_3_', '=', $url);
@@ -41,6 +60,11 @@ class VotesController extends AppController {
 		return $url;
 	}
 
+/**
+ * add method
+ *
+ * @return void
+ */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Vote->create();
@@ -55,8 +79,14 @@ class VotesController extends AppController {
 		}
 	}
 
+/**
+ * delete method
+ *
+ * @param string $user_id, $type_name, $type_id, $url
+ * @return array
+ */
 	public function delete($user_id, $type_name, $type_id, $url) {
-		debug($url);
+		// remettre l'url selon le bon format
 		$url = $this->url_decode($url);
 
 		$options = array(

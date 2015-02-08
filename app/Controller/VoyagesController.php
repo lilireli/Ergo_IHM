@@ -1,4 +1,9 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 /**
  * Voyages Controller
@@ -43,7 +48,7 @@ class VoyagesController extends AppController {
 	 				'UserVoyage.user_id = '.$id
 	 			),
 	 			'order' => array(
-					'Voyage.date_debut DESC',
+					'Voyage.date_debut DESC'
 				)
 	 		)));
 
@@ -130,14 +135,14 @@ class VoyagesController extends AppController {
 		}
 	}
 
+/**
+ * participants method
+ *
+ * @param string $id
+ * @return array
+ */
 	public function participants($id = null) {
 		// Lister les participants d'un voyage
-
-		// equivalent SQL simple
- 		// SELECT *
- 		// FROM voyages AS v
- 		//		INNER JOIN users_voyages AS uv ON v.voyage_id = uv.voyage_id
-		// WHERE users_voyages.voyage_id = $voyage_id;
 
 		$options = array(
 			'joins' => array(
@@ -169,6 +174,11 @@ class VoyagesController extends AppController {
 	 	return $this->Voyage->find('all', $options);
 	}
 
+/**
+ * add_participant method
+ *
+ * @return void
+ */
 	public function add_participants() {
 		if ($this->request->is('post')) {
 			$this->Voyage->create();
@@ -185,6 +195,13 @@ class VoyagesController extends AppController {
 		$this->set(compact('users'));
 	}
 
+/**
+ * delete_participant method
+ *
+ * @throws NotFoundException
+ * @param string $voyage_id, $user_id
+ * @return void
+ */
 	public function delete_participant($voyage_id, $user_id) {
 		if(empty($voyage_id) || empty($user_id)){
 			throw new NotFoundException(__('Invalid voyage and user'));

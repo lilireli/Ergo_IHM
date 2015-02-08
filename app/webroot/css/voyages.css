@@ -1,5 +1,9 @@
-/*
- * Voyages
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Gestions de l'onglet voyages
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
  */
 
 /* div a mettre sur tous les voyages pour gérer l'espace en bas de la frise */
@@ -132,6 +136,7 @@ div.phantom_etape {
             transform: rotate(-90deg);
 }
 
+/* icone pour bouger la frise à droite et à gauche */
 div.frise_move_right {
 	position:fixed;
 	right: 0;
@@ -148,7 +153,7 @@ div.frise_move_left {
 }
 
 /*
- * Onglets
+ * Onglets (lorsque clic sur étape ou transport)
  */
 #menu {
     border-bottom : 1px solid #6d6e72;
@@ -214,6 +219,7 @@ div.button_keeper {
 	width: 40px;
 }
 
+/* Gérer les boutons des listes (cachés derrières formulaires) */ 
 div.behind {
 	position: absolute;
 	display: inline-block;

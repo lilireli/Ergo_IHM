@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Voir un hebergement
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php $this->element('date_to_string'); // afficher dates français ?>
 
 <div class="general_voyage">
@@ -10,9 +20,6 @@
             '&etape_name='.$etape_name;
 
 	    $user_id = $this->session->read('Auth.User.user_id');
-
-	    $accepte = false;
-	    $i = 0;
 	?>
 
 	<div>
@@ -38,6 +45,7 @@
 	
 
 	<?php    
+		// afficher les onglets
 	    echo $this->element('menu_etape', array('base_url' => $etape_id.$base_url, 'tab' => 1));
 	?>
 
@@ -54,7 +62,6 @@
 					<?php 
 						// changer la couleur de la case si l'hébergement est validé
 						if ($hebergement['Hebergement']['accepte'] == 1) { 
-							$accepte = true;
 					?>
 						<td class="accepte">
 					<?php } else { ?>
@@ -172,7 +179,7 @@
 
 						<!-- Validation -->
 						<div class="float button_keeper">
-							<?php if(!$accepte) { ?>
+							<?php if($hebergement['Hebergement']['accepte'] == 0) { ?>
 								<div class="behind">
 								<?php echo $this->element('pictograms', array('name' => 'check')) ?>
 								</div>
@@ -192,7 +199,7 @@
 								<?php echo $this->Form->end(__('Valider')); ?>
 								</div>
 
-							<?php } else if ($i==0) { ?>
+							<?php } else { ?>
 								<div class="behind">
 								<?php echo $this->element('pictograms', array('name' => 'uncheck')) ?>
 								</div>
@@ -233,8 +240,6 @@
 									__('Etes-vous sûr de vouloir supprimer l\'hébergement ?')); ?>
 								</div>
 							</div>
-
-								<?php $i += 1; ?>
 						</div>
 						</div>
 					</td>
@@ -324,11 +329,13 @@
 </div>
 
 <?php
+    // afficher la frise
     echo $this->element('frise', array(
         'voyage_id' => $voyage_id
     ));
 ?>
 
 <script>
-	$('#etape<?php echo __($etape_id); ?>').addClass("etape_selected");
+    // selectionner l'étape
+    $('#etape<?php echo __($etape_id); ?>').addClass("etape_selected");
 </script>

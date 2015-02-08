@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Gestion des participants d'un voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php 
 	$participants = $this->requestAction(
 		array('controller'=>'Voyages', 'action'=>'participants', $voyage_id)); 
@@ -11,6 +21,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			<!-- Liste des participants -->
 			<?php foreach ($participants as $participant): ?>
 			<tr>
 				<td>
@@ -22,6 +33,7 @@
 				</td>
 			</tr>
 			<?php endforeach; ?>
+			<!-- Ajout d'un participant -->
 			<tr>
 				<td>
 					<div id="small">
@@ -39,6 +51,7 @@
 
 				        <div class="add participant">
 				        	<?php 
+				        		// importer les scripts js nous permettant l'autocomplétion du nom du participant
 				        		echo $this->Html->script('jquery_1.11.0', array('inline'=>false));
 								echo $this->Html->script('jquery-ui.min', array('inline'=>false));
 								echo $this->Html->script('jquery.ui.autocomplete.html', array('inline'=>false));

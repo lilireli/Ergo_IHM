@@ -3,7 +3,6 @@
  * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
  *
  * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
- * @package       app.View.Layouts
  */
 
 // version de GroupTrotteur
@@ -19,8 +18,10 @@ $GTVersion = __d('gt_dev', '1.0')
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
+		// gestion de l'icone de titre
 		echo $this->Html->meta('icon');
 
+		// gestion du css
 		echo $this->Html->css('errors');
 		echo $this->Html->css('header_footer');
 		echo $this->Html->css('forms');
@@ -30,17 +31,17 @@ $GTVersion = __d('gt_dev', '1.0')
 		echo $this->Html->css('autocomplete');
 		echo $this->Html->css('../js/jscalendar/calendar-white');
 
-		echo $this->Html->script('jscalendar/calendar.js');
-		echo $this->Html->script('jscalendar/lang/calendar-fr.js');
-		echo $this->Html->script('custom_calendar.js');
-
-
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 
+		// gestion des scripts
 		echo $this->Html->script('jquery_1.11.0', array('inline'=>false));
 		echo $this->Html->script('jquery-ui.min', array('inline'=>false));
 		echo $this->Html->script('general',array('inline'=>false));
+		echo $this->Html->script('jscalendar/calendar.js');
+		echo $this->Html->script('jscalendar/lang/calendar-fr.js');
+		echo $this->Html->script('custom_calendar.js');
+		
 		echo $this->fetch('script');
 	?>
 </head>
@@ -85,7 +86,7 @@ $GTVersion = __d('gt_dev', '1.0')
 					?>
 					<br>
 					<?php
-						echo ucfirst(strtolower($username));  // utilisateur
+						echo ucfirst(strtolower($username));  // nom utilisateur formatté (Aaaaa)
 					?>
 				</div>
 				<div class="userActions">

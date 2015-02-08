@@ -1,10 +1,20 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
 App::uses('AppController', 'Controller');
 /**
  * Hebergement Controller
  *
  */
 class HebergementsController extends AppController {
+/**
+ * add method
+ *
+ * @return void
+ */
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Hebergement->create();
@@ -21,7 +31,14 @@ class HebergementsController extends AppController {
 		}
 	}
 
+/**
+ * index method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function edit($id = null) {
+		// enlever les paramètres pour récupérer le bon id
 		$id = strtok(basename($id), '?');
 		$id = strtok(basename($id), '%3F');
 		
@@ -45,6 +62,12 @@ class HebergementsController extends AppController {
 		}
 	}
 
+/**
+ * view method
+ *
+ * @param string $id
+ * @return void
+ */
 	public function view($id) {
 	// parameter: one etape id
 		$id = strtok($id, "?");
@@ -99,7 +122,14 @@ class HebergementsController extends AppController {
 		$this->set('hebergements', $this->Hebergement->find('all', $options));
 	}
 
+/**
+ * delete method
+ *
+ * @param string $id, string $etape_id, string $voyage_id, string $etape_name
+ * @return void
+ */
 	public function delete($id = null, $etape_id, $voyage_id, $etape_name) {
+		// la plupart des paramètres servent à la redirection
 		$this->Hebergement->id = $id;
 		if (!$this->Hebergement->exists()) {
 			throw new NotFoundException(__('Invalid hebergement'));

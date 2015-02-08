@@ -1,5 +1,13 @@
-// champs qui peuvent s'agrandir et se réduire
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Gestion générale du site
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+
 $(document).ready(function() {
+    // champs qui peuvent s'agrandir et se réduire
     $('#normal').hide();
 
     $('#small').click(function() {
@@ -11,7 +19,7 @@ $(document).ready(function() {
         $('#small').show();
     });
 
-    $('#normal2').hide();
+    $('#normal2').hide(); // 2e champ au cas où on en ai deux sur une même page
 
     $('#small2').click(function() {
         $('#small2').hide();
@@ -22,6 +30,8 @@ $(document).ready(function() {
         $('#small2').show();
     });
 
+
+    // gérer l'onglet actif, pour le mettre dans la bonne couleur dans le bandeau
     var pathname = window.location.pathname;
 
     if (pathname == "/") {

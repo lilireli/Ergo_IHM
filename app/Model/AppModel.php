@@ -1,5 +1,9 @@
 <?php
 /**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ */
+
+/**
  * Application model for CakePHP.
  *
  * This file is application-wide model file. You can put all

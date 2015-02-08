@@ -1,9 +1,15 @@
 <?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ * @package       app.Model.Etape
+ */
 App::uses('AppModel', 'Model');
 /**
- * Voyage Model
+ * Etape Model
  *
- * @property users_voyages $users_voyages
+ *
  */
 class Etape extends AppModel {
 
@@ -21,6 +27,11 @@ class Etape extends AppModel {
  */
 	public $displayField = 'etape_name';
 
+/**
+ * BelongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
         'Voyage' => array(
             'className' => 'Voyage',
@@ -32,6 +43,11 @@ class Etape extends AppModel {
         )
     );
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
     public $validate = array(
 		'etape_id' => array(
 			'numeric' => array(
@@ -60,6 +76,7 @@ class Etape extends AppModel {
         )
 	);
 
+    // fonctions de validation
     public function after_today() {
         $today = date('Y-m-d H:i:s');
         return $this->data[$this->alias]['date_debut'] > $today;

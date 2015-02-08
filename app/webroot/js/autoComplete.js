@@ -1,3 +1,11 @@
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Fonction d'autocompletion pour les noms des participants
+ *
+ * @author   	  A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+
 $(document).ready(function(){
 	document.getElementById('participants').value= "";
 
@@ -6,9 +14,14 @@ $(document).ready(function(){
 
 	var voyage = document.getElementById("voyage_id");
 	var voyage_id = voyage.value;
+
+	// get the beginning of the url
+	var pathname = window.location.pathname;
+	var urlComplete = pathname.split('/voyages/view');
+	var url = urlComplete[0];
 	
 	$("#participants").autocomplete({
-	    source: "/users/autoComplete/?voyage="+voyage_id + name, // appeler le fichier php qui nous renverra les noms possibles
+	    source: url + "/users/autoComplete/?voyage="+voyage_id + name, // appeler le fichier php qui nous renverra les noms possibles
 	    minLength: 2, //This is the min ammount of chars before autocomplete kicks in
 	    
 	    // when field is selected keep the user, create the id

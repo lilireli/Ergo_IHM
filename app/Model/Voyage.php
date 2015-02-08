@@ -24,8 +24,6 @@ class Voyage extends AppModel {
 	public $foreignKey = 'createur_id';
 
 
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
 /**
  * hasAndBelongsToMany associations
  *
@@ -47,7 +45,11 @@ class Voyage extends AppModel {
 		)
 	);
 
-
+/**
+ * BelongsTo associations
+ *
+ * @var array
+ */
 	public $belongsTo = array(
         'User' => array(
             'className' => 'User',
@@ -55,7 +57,11 @@ class Voyage extends AppModel {
         )
     );
 
-
+/**
+ * Validation rules
+ *
+ * @var array
+ */
     public $validate = array(
 		'voyage_id' => array(
 			'numeric' => array(
@@ -84,6 +90,7 @@ class Voyage extends AppModel {
         )
 	);
 
+    // fonctions de validation
     public function after_today() {
     	$today = date('Y-m-d H:i:s');
     	return $this->data[$this->alias]['date_debut'] > $today;

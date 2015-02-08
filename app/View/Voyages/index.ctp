@@ -1,8 +1,19 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Voir la liste des voyages, et en ajouter si nécessaire
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php $this->element('date_to_string'); // afficher dates français ?>
 
 <h1><?php echo __('Mes Voyages'); ?></h1>
 
 
+<!-- Liste des voyages -->
 <?php foreach ($voyages as $voyage): ?>
 <div class="list_voyages">
 	<h4><?php echo h(ucfirst(strtolower($voyage['Voyage']['voyage_name']))); ?></h4>
@@ -35,12 +46,13 @@
 </div>
 <?php endforeach; ?>
 
+<!-- Ajouter un voyage -->
 <div class="list_voyages form_voyages" id="wrapper">
-    <div id="small">
+    <div id="small"><!-- réduire -->
         <?php echo $this->Html->image('add_button_orange.png', array('height'=>'20px'));?>
         <big><?php echo h('Créer un nouveau voyage'); ?></big>
     </div>
-    <div id="normal">
+    <div id="normal"><!-- agrandir -->
     	<div class='float'>
 	    	<?php echo $this->Html->image('add_button_orange.png', array('height'=>'20px'));?>
 	        <big><?php echo h('Créer un nouveau voyage'); ?></big>

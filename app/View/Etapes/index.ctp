@@ -1,3 +1,13 @@
+<?php
+/**
+ * GroupTrotteur: Heureux qui comme Ulysse a fait un beau voyage
+ *
+ * Afficher l'étape
+ *
+ * @author        A. Chardon, A. El Bachiri, J. Pieyre, A. Suzanne
+ */
+?>
+
 <?php $this->element('date_to_string'); // afficher dates français ?>
 
 <div class="general_voyage">
@@ -32,6 +42,8 @@
     </div>
 
     <?php
+        // afficher les onglets
+
         if (isset($_GET['tab']))
         {  // si tab existe
             $tab = $_GET['tab'];
@@ -69,11 +81,13 @@
 </div>
 
 <?php
+    // afficher la frise
     echo $this->element('frise', array(
         'voyage_id' => $voyage_id
     ));
 ?>
 
 <script>
+    // selectionner l'étape
     $('#etape<?php echo __($etape_id); ?>').addClass("etape_selected");
 </script>
